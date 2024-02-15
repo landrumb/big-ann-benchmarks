@@ -631,6 +631,41 @@ class CrawlDataset(DatasetCompetitionFormat):
     def distance(self):
         return "euclidean"
 
+class EnronDataset(DatasetCompetitionFormat):
+
+    def __init__(self, filtered=True, dummy=False):
+        self.filtered = filtered
+        self.nb = 94987
+        self.d = 1369
+        self.nq = 200
+        self.dtype = "float32" #need to fix
+
+        self.ds_fn = "enron_base.fvec"
+        self.qs_fn = "enron_query.fvec"
+        self.ds_metadata_fn = "label_enron_base.spmat"
+        self.qs_metadata_fn = "label_enron_query.spmat"
+
+        self.gt_fn = "enron_gt.ibin"
+        self.basedir = os.path.join(BASEDIR, "enron")
+
+    def prepare(self, skip_data=False):
+        pass
+
+    def get_dataset_fn(self):
+        return os.path.join(self.basedir, self.ds_fn)
+    
+    def get_dataset_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.ds_metadata_fn))
+
+    def get_queries_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.qs_metadata_fn))
+    
+    def search_type(self):
+        return "knn_filtered"
+    
+    def distance(self):
+        return "euclidean"
+
 
 class YFCC100MDataset(DatasetCompetitionFormat):
     """ the 2023 competition """
