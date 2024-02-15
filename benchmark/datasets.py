@@ -595,6 +595,43 @@ class RandomRangeDS(DatasetCompetitionFormat):
     def __str__(self):
         return f"RandomRange({self.nb})"
 
+
+class CrawlDataset(DatasetCompetitionFormat):
+
+    def __init__(self, filtered=True, dummy=False):
+        self.filtered = filtered
+        self.nb = 1989995
+        self.d = 300
+        self.nq = 10000
+        self.dtype = "float32" #need to fix
+
+        self.ds_fn = "crawl_base.fvec"
+        self.qs_fn = "crawl_query.fvec"
+        self.ds_metadata_fn = "label_crawl_base.spmat"
+        self.qs_metadata_fn = "label_crawl_query.spmat"
+
+        self.gt_fn = "crawl_gt.ibin"
+        self.basedir = os.path.join(BASEDIR, "crawl")
+
+    def prepare(self, skip_data=False):
+        pass
+
+    def get_dataset_fn(self):
+        return os.path.join(self.basedir, self.ds_fn)
+    
+    def get_dataset_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.ds_metadata_fn))
+
+    def get_queries_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.qs_metadata_fn))
+    
+    def get_search_type(self):
+        return "knn_filtered"
+    
+    def distance(self):
+        return "euclidean"
+
+
 class YFCC100MDataset(DatasetCompetitionFormat):
     """ the 2023 competition """
 
@@ -1134,4 +1171,6 @@ DATASETS = {
     'random-filter-s': lambda : RandomFilterDS(100000, 1000, 50),
 
     'openai-embedding-1M': lambda: OpenAIEmbedding1M(93652),
+
+    'crawl': lambda: CrawlDataset(),
 }
