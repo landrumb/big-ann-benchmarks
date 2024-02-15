@@ -625,7 +625,7 @@ class CrawlDataset(DatasetCompetitionFormat):
     def get_queries_metadata(self):
         return read_sparse_matrix(os.path.join(self.basedir, self.qs_metadata_fn))
     
-    def get_search_type(self):
+    def search_type(self):
         return "knn_filtered"
     
     def distance(self):
