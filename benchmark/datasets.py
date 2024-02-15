@@ -603,7 +603,7 @@ class CrawlDataset(DatasetCompetitionFormat):
         self.nb = 1989995
         self.d = 300
         self.nq = 10000
-        self.dtype = "float32" #need to fix
+        self.dtype = "float32"
 
         self.ds_fn = "crawl_base.fvec"
         self.qs_fn = "crawl_query.fvec"
@@ -638,7 +638,7 @@ class EnronDataset(DatasetCompetitionFormat):
         self.nb = 94987
         self.d = 1369
         self.nq = 200
-        self.dtype = "float32" #need to fix
+        self.dtype = "float32" 
 
         self.ds_fn = "enron_base.fvec"
         self.qs_fn = "enron_query.fvec"
@@ -666,6 +666,181 @@ class EnronDataset(DatasetCompetitionFormat):
     def distance(self):
         return "euclidean"
 
+class GistDataset(DatasetCompetitionFormat):
+
+    def __init__(self, filtered=True, dummy=False):
+        self.filtered = filtered
+        self.nb = 1000000
+        self.d = 960
+        self.nq = 1000
+        self.dtype = "float32"
+
+        self.ds_fn = "gist_base.fvec"
+        self.qs_fn = "gist_query.fvec"
+        self.ds_metadata_fn = "label_gist_base.spmat"
+        self.qs_metadata_fn = "label_gist_query.spmat"
+
+        self.gt_fn = "gist_gt.ibin"
+        self.basedir = os.path.join(BASEDIR, "gist")
+
+    def prepare(self, skip_data=False):
+        pass
+
+    def get_dataset_fn(self):
+        return os.path.join(self.basedir, self.ds_fn)
+    
+    def get_dataset_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.ds_metadata_fn))
+
+    def get_queries_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.qs_metadata_fn))
+    
+    def search_type(self):
+        return "knn_filtered"
+    
+    def distance(self):
+        return "euclidean"
+
+
+class MsongDataset(DatasetCompetitionFormat):
+
+    def __init__(self, filtered=True, dummy=False):
+        self.filtered = filtered
+        self.nb = 992272
+        self.d = 420
+        self.nq = 200
+        self.dtype = "float32"
+
+        self.ds_fn = "msong_base.fvec"
+        self.qs_fn = "msong_query.fvec"
+        self.ds_metadata_fn = "label_msong_base.spmat"
+        self.qs_metadata_fn = "label_msong_query.spmat"
+
+        self.gt_fn = "msong_gt.ibin"
+        self.basedir = os.path.join(BASEDIR, "msong")
+
+    def prepare(self, skip_data=False):
+        pass
+
+    def get_dataset_fn(self):
+        return os.path.join(self.basedir, self.ds_fn)
+    
+    def get_dataset_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.ds_metadata_fn))
+
+    def get_queries_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.qs_metadata_fn))
+    
+    def search_type(self):
+        return "knn_filtered"
+    
+    def distance(self):
+        return "euclidean"
+
+class AudioDataset(DatasetCompetitionFormat):
+
+    def __init__(self, filtered=True, dummy=False):
+        self.filtered = filtered
+        self.nb = 53387
+        self.d = 192
+        self.nq = 200
+        self.dtype = "float32"
+
+        self.ds_fn = "audio_base.fvec"
+        self.qs_fn = "audio_query.fvec"
+        self.ds_metadata_fn = "label_audio_base.spmat"
+        self.qs_metadata_fn = "label_audio_query.spmat"
+
+        self.gt_fn = "audio_gt.ibin"
+        self.basedir = os.path.join(BASEDIR, "audio")
+
+    def prepare(self, skip_data=False):
+        pass
+
+    def get_dataset_fn(self):
+        return os.path.join(self.basedir, self.ds_fn)
+    
+    def get_dataset_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.ds_metadata_fn))
+
+    def get_queries_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.qs_metadata_fn))
+    
+    def search_type(self):
+        return "knn_filtered"
+    
+    def distance(self):
+        return "euclidean"
+
+class SiftDataset(DatasetCompetitionFormat):
+
+    def __init__(self, filtered=True, dummy=False):
+        self.filtered = filtered
+        self.nb = 1000000
+        self.d = 128
+        self.nq = 10000
+        self.dtype = "float32"
+
+        self.ds_fn = "sift_base.fvec"
+        self.qs_fn = "sift_query.fvec"
+        self.ds_metadata_fn = "label_sift_base.spmat"
+        self.qs_metadata_fn = "label_sift_query.spmat"
+
+        self.gt_fn = "sift_gt.ibin"
+        self.basedir = os.path.join(BASEDIR, "sift")
+
+    def prepare(self, skip_data=False):
+        pass
+
+    def get_dataset_fn(self):
+        return os.path.join(self.basedir, self.ds_fn)
+    
+    def get_dataset_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.ds_metadata_fn))
+
+    def get_queries_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.qs_metadata_fn))
+    
+    def search_type(self):
+        return "knn_filtered"
+    
+    def distance(self):
+        return "euclidean"
+
+class UQVDataset(DatasetCompetitionFormat):
+
+    def __init__(self, filtered=True, dummy=False):
+        self.filtered = filtered
+        self.nb = 1000000
+        self.d = 256
+        self.nq = 10000
+        self.dtype = "float32"
+
+        self.ds_fn = "uqv_base.fvec"
+        self.qs_fn = "uqv_query.fvec"
+        self.ds_metadata_fn = "label_uqv_base.spmat"
+        self.qs_metadata_fn = "label_uqv_query.spmat"
+
+        self.gt_fn = "uqv_gt.ibin"
+        self.basedir = os.path.join(BASEDIR, "uqv")
+
+    def prepare(self, skip_data=False):
+        pass
+
+    def get_dataset_fn(self):
+        return os.path.join(self.basedir, self.ds_fn)
+    
+    def get_dataset_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.ds_metadata_fn))
+
+    def get_queries_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.qs_metadata_fn))
+    
+    def search_type(self):
+        return "knn_filtered"
+    
+    def distance(self):
+        return "euclidean"
 
 class YFCC100MDataset(DatasetCompetitionFormat):
     """ the 2023 competition """
