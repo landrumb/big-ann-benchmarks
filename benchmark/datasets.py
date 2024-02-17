@@ -1383,4 +1383,10 @@ DATASETS = {
     'openai-embedding-1M': lambda: OpenAIEmbedding1M(93652),
 
     'crawl': lambda: CrawlDataset(),
+    'enron': lambda: EnronDataset(),
+    'gist': lambda: GistDataset(),
+    'msong': lambda: MsongDataset(),
+    'audio': lambda: AudioDataset(),
+    'sift': lambda: SiftDataset(),
+    'uqv': lambda: UQVDataset(),
 }
