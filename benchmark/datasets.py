@@ -842,6 +842,45 @@ class UQVDataset(DatasetCompetitionFormat):
     def distance(self):
         return "euclidean"
 
+class WikiSentenceDataset(DatasetCompetitionFormat):
+
+    def __init__(self, query_filter_set="double_common", filtered=True, dummy=False):
+        self.filtered = filtered
+        self.nb = 35_000_000
+        self.d = 768
+        self.nq = 5000
+        self.dtype = "float32"
+
+        self.ds_fn = "base.35M.4k.fbin"
+        self.qs_fn = "wikipedia_simple_query_embeddings.bin"
+        self.ds_metadata_fn = "base.35M.4k.metadata.spmat"
+
+        self.query_filter_set = query_filter_set
+
+        self.qs_metadata_fn = f"wikipedia_simple_query_labels_numeric_{self.query_filter_set}.spmat"
+
+        self.gt_fn = f"wikipedia_simple_query_labels_numeric_{self.query_filter_set}_gt.spmat"
+        self.basedir = os.path.join(BASEDIR, "wiki_sentence")
+
+    def prepare(self, skip_data=False):
+        pass
+
+    def get_dataset_fn(self):
+        return os.path.join(self.basedir, self.ds_fn)
+    
+    def get_dataset_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.ds_metadata_fn))
+
+    def get_queries_metadata(self):
+        return read_sparse_matrix(os.path.join(self.basedir, self.qs_metadata_fn))
+    
+    def search_type(self):
+        return "knn_filtered"
+    
+    def distance(self):
+        return "euclidean"
+
+
 class YFCC100MDataset(DatasetCompetitionFormat):
     """ the 2023 competition """
 
@@ -1389,4 +1428,6 @@ DATASETS = {
     'audio': lambda: AudioDataset(),
     'sift': lambda: SiftDataset(),
     'uqv': lambda: UQVDataset(),
+
+    'wiki-double-common': lambda: WikiSentenceDataset('double_common'),
 }

@@ -21,7 +21,8 @@ random-filter-s:
                               {"max_degree": 12,
                                "limit": 200,
                                "alpha": 1.175}],
-              "bitvector_cutoff": 10000
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True"
             }]
           query-args: |
             [{"target_points": 15000,
@@ -52,7 +53,8 @@ yfcc-10M:
                               {"max_degree": 12,
                                "limit": 200,
                                "alpha": 1.175}],
-              "bitvector_cutoff": 10000
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True"
             }]
           query-args: |
             [{"target_points": 5000,
@@ -108,7 +110,7 @@ crawl:
         base:
           args: |
             [{"cluster_size": 5000, 
-              "T": 96,
+              "T": 8,
               "cutoff": 10000,
               "max_iter": 10,
               "weight_classes": [100000, 400000],
@@ -121,7 +123,8 @@ crawl:
                               {"max_degree": 12,
                                "limit": 200,
                                "alpha": 1.175}],
-              "bitvector_cutoff": 10000
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True"
             }]
           query-args: |
             [{"target_points": 15000,
@@ -164,7 +167,8 @@ enron:
                               {"max_degree": 12,
                                "limit": 200,
                                "alpha": 1.175}],
-              "bitvector_cutoff": 10000
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True"
             }]
           query-args: |
             [{"target_points": 15000,
@@ -200,7 +204,8 @@ gist:
                               {"max_degree": 12,
                                "limit": 200,
                                "alpha": 1.175}],
-              "bitvector_cutoff": 10000
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True"
             }]
           query-args: |
             [{"target_points": 15000,
@@ -236,7 +241,8 @@ msong:
                               {"max_degree": 12,
                                "limit": 200,
                                "alpha": 1.175}],
-              "bitvector_cutoff": 10000
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True"
             }]
           query-args: |
             [{"target_points": 15000,
@@ -272,7 +278,8 @@ audio:
                               {"max_degree": 12,
                                "limit": 200,
                                "alpha": 1.175}],
-              "bitvector_cutoff": 10000
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True"
             }]
           query-args: |
             [{"target_points": 15000,
@@ -308,7 +315,8 @@ sift:
                               {"max_degree": 12,
                                "limit": 200,
                                "alpha": 1.175}],
-              "bitvector_cutoff": 10000
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True"
             }]
           query-args: |
             [{"target_points": 15000,
@@ -344,7 +352,8 @@ uqv:
                               {"max_degree": 12,
                                "limit": 200,
                                "alpha": 1.175}],
-              "bitvector_cutoff": 10000
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True"
             }]
           query-args: |
             [{"target_points": 15000,
@@ -357,3 +366,72 @@ uqv:
               }
               ]
               
+wiki-double-common:
+    parlayivf:
+      docker-tag: neurips23-filter-parlayivf
+      module: neurips23.filter.parlayivf.parlayivf
+      constructor: ParlayIVF
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"cluster_size": 5000, 
+              "T": 180,
+              "cutoff": 10000,
+              "max_iter": 10,
+              "weight_classes": [100000, 400000],
+              "build_params": [{"max_degree": 8,
+                                "limit": 200,
+                                "alpha": 1.175},
+                              {"max_degree": 10,
+                               "limit": 200,
+                               "alpha": 1.175},
+                              {"max_degree": 12,
+                               "limit": 200,
+                               "alpha": 1.175}],
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True"
+            }]
+          query-args: |
+            [{"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [500, 500, 500]
+              },
+              {"target_points": 7500,
+               "tiny_cutoff": 35000,
+               "beam_widths": [55, 55, 55]
+               },
+               {"target_points": 5000,
+              "tiny_cutoff": 28000,
+              "beam_widths": [90, 57, 90],
+              "search_limits": [500, 500, 500]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [60, 60, 60]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [90, 90, 90]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [90, 90, 90]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [50, 50, 50]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [50, 50, 50]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [40, 40, 40]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [40, 40, 40]
+              }]
