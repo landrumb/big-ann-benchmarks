@@ -31,8 +31,18 @@ class ParlayIVF(BaseFilterANN):
 
         if 'T' in index_params:
             os.environ['PARLAY_NUM_THREADS'] = str(min(int(index_params['T']), os.cpu_count()))
+        
+        if 'materialize_joins' in index_params:
+            if index_params['materialize_joins'] == 'False':
+                self._materialize_joins = False
+            elif index_params['materialize_joins'] == 'True':
+                self._materialize_joins = True
+            else:
+                raise Exception('Invalid materialize_joins parameter')
+        else:
+            self._materialize_joins = True
 
-        self.name = f'parlayivf_{self._metric}_{self._cluster_size}_{self._cutoff}'
+        self.name = f"parlayivf_{self._metric}_{self._cluster_size}_{self._cutoff}_{'materialized' if self._materialize_joins else 'unmaterialized'}"
 
     def translate_dist_fn(self, metric):
         if metric == 'euclidean':
@@ -117,6 +127,7 @@ class ParlayIVF(BaseFilterANN):
 
         self.index.set_max_iter(self._max_iter)
         self.index.set_bitvector_cutoff(self._bitvector_cutoff)
+        self.index.set_materialized_joins(self._materialize_joins)
 
         for i, bp in enumerate(self._build_params):
             self.index.set_build_params(bp, i)
@@ -140,6 +151,7 @@ class ParlayIVF(BaseFilterANN):
 
         self.index.set_max_iter(self._max_iter)
         self.index.set_bitvector_cutoff(self._bitvector_cutoff)
+        self.index.set_materialized_joins(self._materialize_joins)
 
         for i, bp in enumerate(self._build_params):
             self.index.set_build_params(bp, i)
