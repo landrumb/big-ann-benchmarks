@@ -42,6 +42,16 @@ class ParlayIVF(BaseFilterANN):
         else:
             self._materialize_joins = True
 
+        if 'sorted_queries' in index_params:
+            if index_params['sorted_queries'] == 'False':
+                self._sorted_queries = False
+            elif index_params['sorted_queries'] == 'True':
+                self._sorted_queries = True
+            else:
+                raise Exception('Invalid sorted_queries parameter')
+        else:
+            self._sorted_queries = True
+
         self.name = f"parlayivf_{self._metric}_{self._cluster_size}_{self._cutoff}_{'materialized' if self._materialize_joins else 'unmaterialized'}"
 
     def translate_dist_fn(self, metric):
@@ -183,7 +193,12 @@ class ParlayIVF(BaseFilterANN):
         print(f"Filter construction took {time.time() - start} seconds")
         search_start = time.time()
         nq = X.shape[0]
-        self.res, self.query_dists = self.index.batch_filter_search(X, filters, nq, k)
+        
+        if self._sorted_queries:
+            self.res, self.query_dists = self.index.batch_filter_search(X, filters, nq, k)
+        else:
+            self.res, self.query_dists = self.index.unsorted_batch_filter_search(X, filters, nq, k)
+        
         print(f"Search took {time.time() - search_start} seconds")
         self.index.print_stats() # should be commented out for production
         self.index.reset()
