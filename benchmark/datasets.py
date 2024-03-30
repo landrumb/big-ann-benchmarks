@@ -770,7 +770,7 @@ class AudioDataset(DatasetCompetitionFormat):
         return "knn_filtered"
     
     def distance(self):
-        return "euclidean"
+        return "euclidean" # should be ip
 
 class SiftDataset(DatasetCompetitionFormat):
 
@@ -878,7 +878,7 @@ class WikiSentenceDataset(DatasetCompetitionFormat):
         return "knn_filtered"
     
     def distance(self):
-        return "euclidean"
+        return "ip" 
 
 
 class YFCC100MDataset(DatasetCompetitionFormat):
