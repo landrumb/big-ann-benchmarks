@@ -178,7 +178,50 @@ enron:
               {"target_points": 100000,
               "tiny_cutoff": 60000,
               "beam_widths": [70, 70, 70]
-              }
+              },
+
+              {"tiny_cutoff": 30000,
+              "target_points": 6000,
+              "search_limit": 875,
+              "beam_widths": [115, 40, 60]
+              }, # 25 % Recall
+
+              {"tiny_cutoff": 29000,
+              "target_points": 5000,
+              "search_limit": 585,
+              "beam_widths": [110, 65, 115]
+              }, # 50 % Recall
+
+              {"tiny_cutoff": 16000,
+              "target_points": 5000,
+              "search_limit": 790,
+              "beam_widths": [85, 85, 110]
+              }, # 75 % Recall
+
+              {"tiny_cutoff": 29000,
+              "target_points": 5000,
+              "search_limit": 205,
+              "beam_widths": [45, 120, 125]
+              }, # 80 % Recall
+
+              {"tiny_cutoff": 23000,
+              "target_points": 5000,
+              "search_limit": 475,
+              "beam_widths": [40, 125, 120]
+              }, # 85 % Recall
+
+              {"tiny_cutoff": 15000,
+              "target_points": 9000,
+              "search_limit": 265,
+              "beam_widths": [115, 55, 50]
+              }, # 90 % Recall
+
+              {"tiny_cutoff": 17000,
+              "target_points": 14000,
+              "search_limit": 30,
+              "beam_widths": [90, 115, 80]
+              } # 95 % Recall
+
               ]
 
 gist:
@@ -215,7 +258,50 @@ gist:
               {"target_points": 100000,
               "tiny_cutoff": 60000,
               "beam_widths": [70, 70, 70]
-              }
+              },
+
+              {"tiny_cutoff": 59000,
+              "target_points": 32000,
+              "search_limit": 770,
+              "beam_widths": [65, 60, 35]
+              }, # 25 % Recall
+
+              {"tiny_cutoff": 44000,
+              "target_points": 16000,
+              "search_limit": 90,
+              "beam_widths": [95, 75, 75]
+              }, # 50 % Recall
+
+              {"tiny_cutoff": 14000,
+              "target_points": 18000,
+              "search_limit": 785,
+              "beam_widths": [35, 130, 35]
+              }, # 75 % Recall
+
+              {"tiny_cutoff": 28000,
+              "target_points": 20000,
+              "search_limit": 410,
+              "beam_widths": [130, 40, 40]
+              }, # 80 % Recall
+
+              {"tiny_cutoff": 21000,
+              "target_points": 15000,
+              "search_limit": 70,
+              "beam_widths": [100, 125, 100]
+              }, # 85 % Recall
+
+              {"tiny_cutoff": 70000,
+              "target_points": 7000,
+              "search_limit": 975,
+              "beam_widths": [100, 35, 35]
+              }, # 90 % Recall
+
+              {"tiny_cutoff": 13000,
+              "target_points": 10000,
+              "search_limit": 145,
+              "beam_widths": [130, 35, 130]
+              }, # 95 % Recall
+
               ]
 
 msong:
@@ -252,7 +338,50 @@ msong:
               {"target_points": 100000,
               "tiny_cutoff": 60000,
               "beam_widths": [70, 70, 70]
-              }
+              },
+
+              {"tiny_cutoff": 20000,
+              "target_points": 5000,
+              "search_limit": 75,
+              "beam_widths": [125, 90, 75]
+              }, # 25 % Recall
+
+              {"tiny_cutoff": 70000,
+              "target_points": 6000,
+              "search_limit": 160,
+              "beam_widths": [115, 95, 120]
+              }, # 50 % Recall
+
+              {"tiny_cutoff": 64000,
+              "target_points": 15000,
+              "search_limit": 135,
+              "beam_widths": [80, 50, 115]
+              }, # 75 % Recall
+
+              {"tiny_cutoff": 65000,
+              "target_points": 18000,
+              "search_limit": 50,
+              "beam_widths": [85, 30, 130]
+              }, # 80 % Recall
+
+              {"tiny_cutoff": 65000,
+              "target_points": 21000,
+              "search_limit": 960,
+              "beam_widths": [120, 35, 30]
+              }, # 85 % Recall
+
+              {"tiny_cutoff": 24000,
+              "target_points": 26000,
+              "search_limit": 825,
+              "beam_widths": [115, 40, 120]
+              }, # 90 % Recall
+
+              {"tiny_cutoff": 73000,
+              "target_points": 40000,
+              "search_limit": 55,
+              "beam_widths": [125, 35, 120]
+              }, # 95 % Recall
+
               ]
 
 audio:
@@ -289,7 +418,50 @@ audio:
               {"target_points": 100000,
               "tiny_cutoff": 60000,
               "beam_widths": [70, 70, 70]
-              }
+              },
+
+              {"tiny_cutoff": 36000,
+              "target_points": 14000,
+              "search_limit": 650,
+              "beam_widths": [80, 105, 80]
+              }, # 25 % Recall
+
+              {"tiny_cutoff": 14000,
+              "target_points": 5000,
+              "search_limit": 860,
+              "beam_widths": [40, 125, 50]
+              }, # 50 % Recall
+
+              {"tiny_cutoff": 13000,
+              "target_points": 5000,
+              "search_limit": 515,
+              "beam_widths": [125, 35, 85]
+              }, # 75 % Recall
+
+              {"tiny_cutoff": 28000,
+              "target_points": 37000,
+              "search_limit": 355,
+              "beam_widths": [30, 70, 95]
+              }, # 80 % Recall
+
+              {"tiny_cutoff": 26000,
+              "target_points": 5000,
+              "search_limit": 390,
+              "beam_widths": [100, 85, 85]
+              }, # 85 % Recall
+
+              {"tiny_cutoff": 58000,
+              "target_points": 25000,
+              "search_limit": 240,
+              "beam_widths": [30, 130, 60]
+              }, # 90 % Recall
+
+              {"tiny_cutoff": 90000,
+              "target_points": 28000,
+              "search_limit": 970,
+              "beam_widths": [45, 125, 90]
+              }, # 95 % Recall
+              
               ]
 
 sift:
@@ -326,7 +498,50 @@ sift:
               {"target_points": 100000,
               "tiny_cutoff": 60000,
               "beam_widths": [70, 70, 70]
-              }
+              },
+
+              {"tiny_cutoff": 69000,
+              "target_points": 5000,
+              "search_limit": 965,
+              "beam_widths": [90, 80, 30]
+              }, # 25 % Recall
+
+              {"tiny_cutoff": 79000,
+              "target_points": 6000,
+              "search_limit": 110,
+              "beam_widths": [80, 105, 85]
+              }, # 50 % Recall
+
+              {"tiny_cutoff": 12000,
+              "target_points": 14000,
+              "search_limit": 970,
+              "beam_widths": [130, 125, 65]
+              }, # 75 % Recall
+
+              {"tiny_cutoff": 84000,
+              "target_points": 17000,
+              "search_limit": 255,
+              "beam_widths": [85, 130, 125]
+              }, # 80 % Recall
+
+              {"tiny_cutoff": 46000,
+              "target_points": 21000,
+              "search_limit": 850,
+              "beam_widths": [115, 100, 110]
+              }, # 85 % Recall
+
+              {"tiny_cutoff": 90000,
+              "target_points": 27000,
+              "search_limit": 610,
+              "beam_widths": [85, 60, 55]
+              }, # 90 % Recall
+
+              {"tiny_cutoff": 36000,
+              "target_points": 38000,
+              "search_limit": 625,
+              "beam_widths": [105, 35, 130]
+              }, # 95 % Recall
+
               ]
 
 uqv:
@@ -363,7 +578,50 @@ uqv:
               {"target_points": 100000,
               "tiny_cutoff": 60000,
               "beam_widths": [70, 70, 70]
-              }
+              },
+
+              {"tiny_cutoff": 56000,
+              "target_points": 39000,
+              "search_limit": 855,
+              "beam_widths": [90, 50, 65]
+              }, # 25 % Recall
+
+              {"tiny_cutoff": 46000,
+              "target_points": 32000,
+              "search_limit": 900,
+              "beam_widths": [80, 75, 55]
+              }, # 50 % Recall
+
+              {"tiny_cutoff": 18000,
+              "target_points": 7000,
+              "search_limit": 740,
+              "beam_widths": [115, 90, 90]
+              }, # 75 % Recall
+
+              {"tiny_cutoff": 94000,
+              "target_points": 18000,
+              "search_limit": 955,
+              "beam_widths": [115, 30, 40]
+              }, # 80 % Recall
+
+              {"tiny_cutoff": 24000,
+              "target_points": 20000,
+              "search_limit": 565,
+              "beam_widths": [55, 120, 75]
+              }, # 85 % Recall
+
+              {"tiny_cutoff": 60000,
+              "target_points": 33000,
+              "search_limit": 195,
+              "beam_widths": [120, 100, 110]
+              }, # 90 % Recall
+
+              {"tiny_cutoff": 15000,
+              "target_points": 16000,
+              "search_limit": 500,
+              "beam_widths": [45, 90, 130]
+              }, # 95 % Recall
+
               ]
               
 wiki-double-common:
