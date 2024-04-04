@@ -11,7 +11,10 @@ from benchmark.dataset_io import download_accelerated
 
 class ParlayIVF(BaseFilterANN):
 
-    def __init__(self, metric, index_params):
+    def __init__(self, metric, index_params, *args):
+        if (len(args) > 0):
+            print(args)
+
         self._index_params = index_params
         self._metric = self.translate_dist_fn(metric)
         print(index_params)
@@ -215,3 +218,7 @@ class ParlayIVF(BaseFilterANN):
     
     def index_name(self):
         return f"parlayivf_{self._metric}_{self.dtype}"
+    
+    def footprint(self):
+        """memory footprint of the index in bytes"""
+        return self.index.footprint()

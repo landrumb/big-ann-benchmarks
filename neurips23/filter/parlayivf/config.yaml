@@ -1,695 +1,1940 @@
-random-filter-s:
-    parlayivf:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
-            }]
-          query-args: |
-            [{"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              }]
-
-yfcc-10M:
-    parlayivf:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
-            }]
-          query-args: |
-            [{"target_points": 5000,
-              "tiny_cutoff": 30000,
-              "beam_widths": [85, 50, 95],
-              "search_limits": [500, 500, 500]
-              },
-              {"target_points": 7500,
-               "tiny_cutoff": 35000,
-               "beam_widths": [55, 55, 55]
-               },
-               {"target_points": 5000,
-              "tiny_cutoff": 28000,
-              "beam_widths": [90, 57, 90],
-              "search_limits": [500, 500, 500]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [60, 60, 60]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [90, 90, 90]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [90, 90, 90]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [50, 50, 50]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [50, 50, 50]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [40, 40, 40]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [40, 40, 40]
-              }]
-
-crawl:
-    parlayivf:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
-            }]
-          query-args: |
-            [{"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 10000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 50000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 500000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              }]
-
-enron:
-    parlayivf:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
-            }]
-          query-args: |
-            [{"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 100000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-
-              {"tiny_cutoff": 30000,
-              "target_points": 6000,
-              "search_limit": 875,
-              "beam_widths": [115, 40, 60]
-              }, # 25 % Recall
-
-              {"tiny_cutoff": 29000,
-              "target_points": 5000,
-              "search_limit": 585,
-              "beam_widths": [110, 65, 115]
-              }, # 50 % Recall
-
-              {"tiny_cutoff": 16000,
-              "target_points": 5000,
-              "search_limit": 790,
-              "beam_widths": [85, 85, 110]
-              }, # 75 % Recall
-
-              {"tiny_cutoff": 29000,
-              "target_points": 5000,
-              "search_limit": 205,
-              "beam_widths": [45, 120, 125]
-              }, # 80 % Recall
-
-              {"tiny_cutoff": 23000,
-              "target_points": 5000,
-              "search_limit": 475,
-              "beam_widths": [40, 125, 120]
-              }, # 85 % Recall
-
-              {"tiny_cutoff": 15000,
-              "target_points": 9000,
-              "search_limit": 265,
-              "beam_widths": [115, 55, 50]
-              }, # 90 % Recall
-
-              {"tiny_cutoff": 17000,
-              "target_points": 14000,
-              "search_limit": 30,
-              "beam_widths": [90, 115, 80]
-              } # 95 % Recall
-
-              ]
-
-gist:
-    parlayivf:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
-            }]
-          query-args: |
-            [{"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 100000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-
-              {"tiny_cutoff": 59000,
-              "target_points": 32000,
-              "search_limit": 770,
-              "beam_widths": [65, 60, 35]
-              }, # 25 % Recall
-
-              {"tiny_cutoff": 44000,
-              "target_points": 16000,
-              "search_limit": 90,
-              "beam_widths": [95, 75, 75]
-              }, # 50 % Recall
-
-              {"tiny_cutoff": 14000,
-              "target_points": 18000,
-              "search_limit": 785,
-              "beam_widths": [35, 130, 35]
-              }, # 75 % Recall
-
-              {"tiny_cutoff": 28000,
-              "target_points": 20000,
-              "search_limit": 410,
-              "beam_widths": [130, 40, 40]
-              }, # 80 % Recall
-
-              {"tiny_cutoff": 21000,
-              "target_points": 15000,
-              "search_limit": 70,
-              "beam_widths": [100, 125, 100]
-              }, # 85 % Recall
-
-              {"tiny_cutoff": 70000,
-              "target_points": 7000,
-              "search_limit": 975,
-              "beam_widths": [100, 35, 35]
-              }, # 90 % Recall
-
-              {"tiny_cutoff": 13000,
-              "target_points": 10000,
-              "search_limit": 145,
-              "beam_widths": [130, 35, 130]
-              }, # 95 % Recall
-
-              ]
-
-msong:
-    parlayivf:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
-            }]
-          query-args: |
-            [{"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 100000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-
-              {"tiny_cutoff": 20000,
-              "target_points": 5000,
-              "search_limit": 75,
-              "beam_widths": [125, 90, 75]
-              }, # 25 % Recall
-
-              {"tiny_cutoff": 70000,
-              "target_points": 6000,
-              "search_limit": 160,
-              "beam_widths": [115, 95, 120]
-              }, # 50 % Recall
-
-              {"tiny_cutoff": 64000,
-              "target_points": 15000,
-              "search_limit": 135,
-              "beam_widths": [80, 50, 115]
-              }, # 75 % Recall
-
-              {"tiny_cutoff": 65000,
-              "target_points": 18000,
-              "search_limit": 50,
-              "beam_widths": [85, 30, 130]
-              }, # 80 % Recall
-
-              {"tiny_cutoff": 65000,
-              "target_points": 21000,
-              "search_limit": 960,
-              "beam_widths": [120, 35, 30]
-              }, # 85 % Recall
-
-              {"tiny_cutoff": 24000,
-              "target_points": 26000,
-              "search_limit": 825,
-              "beam_widths": [115, 40, 120]
-              }, # 90 % Recall
-
-              {"tiny_cutoff": 73000,
-              "target_points": 40000,
-              "search_limit": 55,
-              "beam_widths": [125, 35, 120]
-              }, # 95 % Recall
-
-              ]
-
 audio:
-    parlayivf:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
-            }]
-          query-args: |
-            [{"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 100000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-
-              {"tiny_cutoff": 36000,
-              "target_points": 14000,
-              "search_limit": 650,
-              "beam_widths": [80, 105, 80]
-              }, # 25 % Recall
-
-              {"tiny_cutoff": 14000,
-              "target_points": 5000,
-              "search_limit": 860,
-              "beam_widths": [40, 125, 50]
-              }, # 50 % Recall
-
-              {"tiny_cutoff": 13000,
-              "target_points": 5000,
-              "search_limit": 515,
-              "beam_widths": [125, 35, 85]
-              }, # 75 % Recall
-
-              {"tiny_cutoff": 28000,
-              "target_points": 37000,
-              "search_limit": 355,
-              "beam_widths": [30, 70, 95]
-              }, # 80 % Recall
-
-              {"tiny_cutoff": 26000,
-              "target_points": 5000,
-              "search_limit": 390,
-              "beam_widths": [100, 85, 85]
-              }, # 85 % Recall
-
-              {"tiny_cutoff": 58000,
-              "target_points": 25000,
-              "search_limit": 240,
-              "beam_widths": [30, 130, 60]
-              }, # 90 % Recall
-
-              {"tiny_cutoff": 90000,
-              "target_points": 28000,
-              "search_limit": 970,
-              "beam_widths": [45, 125, 90]
-              }, # 95 % Recall
-              
-              ]
-
+  parlayivf:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
+          max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
+          : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
+          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
+          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
+          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\"\n}]\n"
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 36000,\n\
+          \  \"target_points\": 14000,\n  \"search_limit\": 650,\n  \"beam_widths\"\
+          : [80, 105, 80]\n  },  \n  {\"tiny_cutoff\": 14000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 860,\n  \"beam_widths\": [40, 125, 50]\n  },\
+          \  \n  {\"tiny_cutoff\": 13000,\n  \"target_points\": 5000,\n  \"search_limit\"\
+          : 515,\n  \"beam_widths\": [125, 35, 85]\n  },  \n  {\"tiny_cutoff\": 28000,\n\
+          \  \"target_points\": 37000,\n  \"search_limit\": 355,\n  \"beam_widths\"\
+          : [30, 70, 95]\n  },  \n  {\"tiny_cutoff\": 26000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 390,\n  \"beam_widths\": [100, 85, 85]\n  },\
+          \  \n  {\"tiny_cutoff\": 58000,\n  \"target_points\": 25000,\n  \"search_limit\"\
+          : 240,\n  \"beam_widths\": [30, 130, 60]\n  },  \n  {\"tiny_cutoff\": 90000,\n\
+          \  \"target_points\": 28000,\n  \"search_limit\": 970,\n  \"beam_widths\"\
+          : [45, 125, 90]\n  }                \n  ]\n"
+  parlayivf-no-bitvector:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 1000000000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 36000,\n\
+          \  \"target_points\": 14000,\n  \"search_limit\": 650,\n  \"beam_widths\"\
+          : [80, 105, 80]\n  },  \n  {\"tiny_cutoff\": 14000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 860,\n  \"beam_widths\": [40, 125, 50]\n  },\
+          \  \n  {\"tiny_cutoff\": 13000,\n  \"target_points\": 5000,\n  \"search_limit\"\
+          : 515,\n  \"beam_widths\": [125, 35, 85]\n  },  \n  {\"tiny_cutoff\": 28000,\n\
+          \  \"target_points\": 37000,\n  \"search_limit\": 355,\n  \"beam_widths\"\
+          : [30, 70, 95]\n  },  \n  {\"tiny_cutoff\": 26000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 390,\n  \"beam_widths\": [100, 85, 85]\n  },\
+          \  \n  {\"tiny_cutoff\": 58000,\n  \"target_points\": 25000,\n  \"search_limit\"\
+          : 240,\n  \"beam_widths\": [30, 130, 60]\n  },  \n  {\"tiny_cutoff\": 90000,\n\
+          \  \"target_points\": 28000,\n  \"search_limit\": 970,\n  \"beam_widths\"\
+          : [45, 125, 90]\n  }                \n  ]\n"
+  parlayivf-no-material-join:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'False'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 36000,\n\
+          \  \"target_points\": 14000,\n  \"search_limit\": 650,\n  \"beam_widths\"\
+          : [80, 105, 80]\n  },  \n  {\"tiny_cutoff\": 14000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 860,\n  \"beam_widths\": [40, 125, 50]\n  },\
+          \  \n  {\"tiny_cutoff\": 13000,\n  \"target_points\": 5000,\n  \"search_limit\"\
+          : 515,\n  \"beam_widths\": [125, 35, 85]\n  },  \n  {\"tiny_cutoff\": 28000,\n\
+          \  \"target_points\": 37000,\n  \"search_limit\": 355,\n  \"beam_widths\"\
+          : [30, 70, 95]\n  },  \n  {\"tiny_cutoff\": 26000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 390,\n  \"beam_widths\": [100, 85, 85]\n  },\
+          \  \n  {\"tiny_cutoff\": 58000,\n  \"target_points\": 25000,\n  \"search_limit\"\
+          : 240,\n  \"beam_widths\": [30, 130, 60]\n  },  \n  {\"tiny_cutoff\": 90000,\n\
+          \  \"target_points\": 28000,\n  \"search_limit\": 970,\n  \"beam_widths\"\
+          : [45, 125, 90]\n  }                \n  ]\n"
+  parlayivf-no-sorted-queries:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          sorted_queries: 'False'
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 36000,\n\
+          \  \"target_points\": 14000,\n  \"search_limit\": 650,\n  \"beam_widths\"\
+          : [80, 105, 80]\n  },  \n  {\"tiny_cutoff\": 14000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 860,\n  \"beam_widths\": [40, 125, 50]\n  },\
+          \  \n  {\"tiny_cutoff\": 13000,\n  \"target_points\": 5000,\n  \"search_limit\"\
+          : 515,\n  \"beam_widths\": [125, 35, 85]\n  },  \n  {\"tiny_cutoff\": 28000,\n\
+          \  \"target_points\": 37000,\n  \"search_limit\": 355,\n  \"beam_widths\"\
+          : [30, 70, 95]\n  },  \n  {\"tiny_cutoff\": 26000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 390,\n  \"beam_widths\": [100, 85, 85]\n  },\
+          \  \n  {\"tiny_cutoff\": 58000,\n  \"target_points\": 25000,\n  \"search_limit\"\
+          : 240,\n  \"beam_widths\": [30, 130, 60]\n  },  \n  {\"tiny_cutoff\": 90000,\n\
+          \  \"target_points\": 28000,\n  \"search_limit\": 970,\n  \"beam_widths\"\
+          : [45, 125, 90]\n  }                \n  ]\n"
+  parlayivf-no-weight-classes:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 1
+          - 1
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 36000,\n\
+          \  \"target_points\": 14000,\n  \"search_limit\": 650,\n  \"beam_widths\"\
+          : [80, 105, 80]\n  },  \n  {\"tiny_cutoff\": 14000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 860,\n  \"beam_widths\": [40, 125, 50]\n  },\
+          \  \n  {\"tiny_cutoff\": 13000,\n  \"target_points\": 5000,\n  \"search_limit\"\
+          : 515,\n  \"beam_widths\": [125, 35, 85]\n  },  \n  {\"tiny_cutoff\": 28000,\n\
+          \  \"target_points\": 37000,\n  \"search_limit\": 355,\n  \"beam_widths\"\
+          : [30, 70, 95]\n  },  \n  {\"tiny_cutoff\": 26000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 390,\n  \"beam_widths\": [100, 85, 85]\n  },\
+          \  \n  {\"tiny_cutoff\": 58000,\n  \"target_points\": 25000,\n  \"search_limit\"\
+          : 240,\n  \"beam_widths\": [30, 130, 60]\n  },  \n  {\"tiny_cutoff\": 90000,\n\
+          \  \"target_points\": 28000,\n  \"search_limit\": 970,\n  \"beam_widths\"\
+          : [45, 125, 90]\n  }                \n  ]\n"
+crawl:
+  parlayivf:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
+          max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
+          : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
+          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
+          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
+          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\"\n}]\n"
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 10000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 50000,\n\
+          \  \"tiny_cutoff\": 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"\
+          target_points\": 500000,\n  \"tiny_cutoff\": 60000,\n  \"beam_widths\":\
+          \ [70, 70, 70]\n  }]\n"
+  parlayivf-no-bitvector:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 1000000000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 10000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 50000,\n\
+          \  \"tiny_cutoff\": 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"\
+          target_points\": 500000,\n  \"tiny_cutoff\": 60000,\n  \"beam_widths\":\
+          \ [70, 70, 70]\n  }]\n"
+  parlayivf-no-material-join:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'False'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 10000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 50000,\n\
+          \  \"tiny_cutoff\": 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"\
+          target_points\": 500000,\n  \"tiny_cutoff\": 60000,\n  \"beam_widths\":\
+          \ [70, 70, 70]\n  }]\n"
+  parlayivf-no-sorted-queries:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          sorted_queries: 'False'
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 10000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 50000,\n\
+          \  \"tiny_cutoff\": 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"\
+          target_points\": 500000,\n  \"tiny_cutoff\": 60000,\n  \"beam_widths\":\
+          \ [70, 70, 70]\n  }]\n"
+  parlayivf-no-weight-classes:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 1
+          - 1
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 10000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 50000,\n\
+          \  \"tiny_cutoff\": 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"\
+          target_points\": 500000,\n  \"tiny_cutoff\": 60000,\n  \"beam_widths\":\
+          \ [70, 70, 70]\n  }]\n"
+enron:
+  parlayivf:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
+          max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
+          : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
+          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
+          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
+          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\"\n}]\n"
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 30000,\n\
+          \  \"target_points\": 6000,\n  \"search_limit\": 875,\n  \"beam_widths\"\
+          : [115, 40, 60]\n  },  \n  {\"tiny_cutoff\": 29000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 585,\n  \"beam_widths\": [110, 65, 115]\n \
+          \ },  \n  {\"tiny_cutoff\": 16000,\n  \"target_points\": 5000,\n  \"search_limit\"\
+          : 790,\n  \"beam_widths\": [85, 85, 110]\n  },  \n  {\"tiny_cutoff\": 29000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 205,\n  \"beam_widths\"\
+          : [45, 120, 125]\n  },  \n  {\"tiny_cutoff\": 23000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 475,\n  \"beam_widths\": [40, 125, 120]\n \
+          \ },  \n  {\"tiny_cutoff\": 15000,\n  \"target_points\": 9000,\n  \"search_limit\"\
+          : 265,\n  \"beam_widths\": [115, 55, 50]\n  },  \n  {\"tiny_cutoff\": 17000,\n\
+          \  \"target_points\": 14000,\n  \"search_limit\": 30,\n  \"beam_widths\"\
+          : [90, 115, 80]\n  }  \n  ]\n"
+  parlayivf-no-bitvector:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 1000000000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 30000,\n\
+          \  \"target_points\": 6000,\n  \"search_limit\": 875,\n  \"beam_widths\"\
+          : [115, 40, 60]\n  },  \n  {\"tiny_cutoff\": 29000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 585,\n  \"beam_widths\": [110, 65, 115]\n \
+          \ },  \n  {\"tiny_cutoff\": 16000,\n  \"target_points\": 5000,\n  \"search_limit\"\
+          : 790,\n  \"beam_widths\": [85, 85, 110]\n  },  \n  {\"tiny_cutoff\": 29000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 205,\n  \"beam_widths\"\
+          : [45, 120, 125]\n  },  \n  {\"tiny_cutoff\": 23000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 475,\n  \"beam_widths\": [40, 125, 120]\n \
+          \ },  \n  {\"tiny_cutoff\": 15000,\n  \"target_points\": 9000,\n  \"search_limit\"\
+          : 265,\n  \"beam_widths\": [115, 55, 50]\n  },  \n  {\"tiny_cutoff\": 17000,\n\
+          \  \"target_points\": 14000,\n  \"search_limit\": 30,\n  \"beam_widths\"\
+          : [90, 115, 80]\n  }  \n  ]\n"
+  parlayivf-no-material-join:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'False'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 30000,\n\
+          \  \"target_points\": 6000,\n  \"search_limit\": 875,\n  \"beam_widths\"\
+          : [115, 40, 60]\n  },  \n  {\"tiny_cutoff\": 29000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 585,\n  \"beam_widths\": [110, 65, 115]\n \
+          \ },  \n  {\"tiny_cutoff\": 16000,\n  \"target_points\": 5000,\n  \"search_limit\"\
+          : 790,\n  \"beam_widths\": [85, 85, 110]\n  },  \n  {\"tiny_cutoff\": 29000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 205,\n  \"beam_widths\"\
+          : [45, 120, 125]\n  },  \n  {\"tiny_cutoff\": 23000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 475,\n  \"beam_widths\": [40, 125, 120]\n \
+          \ },  \n  {\"tiny_cutoff\": 15000,\n  \"target_points\": 9000,\n  \"search_limit\"\
+          : 265,\n  \"beam_widths\": [115, 55, 50]\n  },  \n  {\"tiny_cutoff\": 17000,\n\
+          \  \"target_points\": 14000,\n  \"search_limit\": 30,\n  \"beam_widths\"\
+          : [90, 115, 80]\n  }  \n  ]\n"
+  parlayivf-no-sorted-queries:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          sorted_queries: 'False'
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 30000,\n\
+          \  \"target_points\": 6000,\n  \"search_limit\": 875,\n  \"beam_widths\"\
+          : [115, 40, 60]\n  },  \n  {\"tiny_cutoff\": 29000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 585,\n  \"beam_widths\": [110, 65, 115]\n \
+          \ },  \n  {\"tiny_cutoff\": 16000,\n  \"target_points\": 5000,\n  \"search_limit\"\
+          : 790,\n  \"beam_widths\": [85, 85, 110]\n  },  \n  {\"tiny_cutoff\": 29000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 205,\n  \"beam_widths\"\
+          : [45, 120, 125]\n  },  \n  {\"tiny_cutoff\": 23000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 475,\n  \"beam_widths\": [40, 125, 120]\n \
+          \ },  \n  {\"tiny_cutoff\": 15000,\n  \"target_points\": 9000,\n  \"search_limit\"\
+          : 265,\n  \"beam_widths\": [115, 55, 50]\n  },  \n  {\"tiny_cutoff\": 17000,\n\
+          \  \"target_points\": 14000,\n  \"search_limit\": 30,\n  \"beam_widths\"\
+          : [90, 115, 80]\n  }  \n  ]\n"
+  parlayivf-no-weight-classes:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 1
+          - 1
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 30000,\n\
+          \  \"target_points\": 6000,\n  \"search_limit\": 875,\n  \"beam_widths\"\
+          : [115, 40, 60]\n  },  \n  {\"tiny_cutoff\": 29000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 585,\n  \"beam_widths\": [110, 65, 115]\n \
+          \ },  \n  {\"tiny_cutoff\": 16000,\n  \"target_points\": 5000,\n  \"search_limit\"\
+          : 790,\n  \"beam_widths\": [85, 85, 110]\n  },  \n  {\"tiny_cutoff\": 29000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 205,\n  \"beam_widths\"\
+          : [45, 120, 125]\n  },  \n  {\"tiny_cutoff\": 23000,\n  \"target_points\"\
+          : 5000,\n  \"search_limit\": 475,\n  \"beam_widths\": [40, 125, 120]\n \
+          \ },  \n  {\"tiny_cutoff\": 15000,\n  \"target_points\": 9000,\n  \"search_limit\"\
+          : 265,\n  \"beam_widths\": [115, 55, 50]\n  },  \n  {\"tiny_cutoff\": 17000,\n\
+          \  \"target_points\": 14000,\n  \"search_limit\": 30,\n  \"beam_widths\"\
+          : [90, 115, 80]\n  }  \n  ]\n"
+gist:
+  parlayivf:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
+          max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
+          : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
+          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
+          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
+          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\"\n}]\n"
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 59000,\n\
+          \  \"target_points\": 32000,\n  \"search_limit\": 770,\n  \"beam_widths\"\
+          : [65, 60, 35]\n  },  \n  {\"tiny_cutoff\": 44000,\n  \"target_points\"\
+          : 16000,\n  \"search_limit\": 90,\n  \"beam_widths\": [95, 75, 75]\n  },\
+          \  \n  {\"tiny_cutoff\": 14000,\n  \"target_points\": 18000,\n  \"search_limit\"\
+          : 785,\n  \"beam_widths\": [35, 130, 35]\n  },  \n  {\"tiny_cutoff\": 28000,\n\
+          \  \"target_points\": 20000,\n  \"search_limit\": 410,\n  \"beam_widths\"\
+          : [130, 40, 40]\n  },  \n  {\"tiny_cutoff\": 21000,\n  \"target_points\"\
+          : 15000,\n  \"search_limit\": 70,\n  \"beam_widths\": [100, 125, 100]\n\
+          \  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\": 7000,\n  \"search_limit\"\
+          : 975,\n  \"beam_widths\": [100, 35, 35]\n  },  \n  {\"tiny_cutoff\": 13000,\n\
+          \  \"target_points\": 10000,\n  \"search_limit\": 145,\n  \"beam_widths\"\
+          : [130, 35, 130]\n  }  \n  ]\n"
+  parlayivf-no-bitvector:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 1000000000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 59000,\n\
+          \  \"target_points\": 32000,\n  \"search_limit\": 770,\n  \"beam_widths\"\
+          : [65, 60, 35]\n  },  \n  {\"tiny_cutoff\": 44000,\n  \"target_points\"\
+          : 16000,\n  \"search_limit\": 90,\n  \"beam_widths\": [95, 75, 75]\n  },\
+          \  \n  {\"tiny_cutoff\": 14000,\n  \"target_points\": 18000,\n  \"search_limit\"\
+          : 785,\n  \"beam_widths\": [35, 130, 35]\n  },  \n  {\"tiny_cutoff\": 28000,\n\
+          \  \"target_points\": 20000,\n  \"search_limit\": 410,\n  \"beam_widths\"\
+          : [130, 40, 40]\n  },  \n  {\"tiny_cutoff\": 21000,\n  \"target_points\"\
+          : 15000,\n  \"search_limit\": 70,\n  \"beam_widths\": [100, 125, 100]\n\
+          \  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\": 7000,\n  \"search_limit\"\
+          : 975,\n  \"beam_widths\": [100, 35, 35]\n  },  \n  {\"tiny_cutoff\": 13000,\n\
+          \  \"target_points\": 10000,\n  \"search_limit\": 145,\n  \"beam_widths\"\
+          : [130, 35, 130]\n  }  \n  ]\n"
+  parlayivf-no-material-join:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'False'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 59000,\n\
+          \  \"target_points\": 32000,\n  \"search_limit\": 770,\n  \"beam_widths\"\
+          : [65, 60, 35]\n  },  \n  {\"tiny_cutoff\": 44000,\n  \"target_points\"\
+          : 16000,\n  \"search_limit\": 90,\n  \"beam_widths\": [95, 75, 75]\n  },\
+          \  \n  {\"tiny_cutoff\": 14000,\n  \"target_points\": 18000,\n  \"search_limit\"\
+          : 785,\n  \"beam_widths\": [35, 130, 35]\n  },  \n  {\"tiny_cutoff\": 28000,\n\
+          \  \"target_points\": 20000,\n  \"search_limit\": 410,\n  \"beam_widths\"\
+          : [130, 40, 40]\n  },  \n  {\"tiny_cutoff\": 21000,\n  \"target_points\"\
+          : 15000,\n  \"search_limit\": 70,\n  \"beam_widths\": [100, 125, 100]\n\
+          \  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\": 7000,\n  \"search_limit\"\
+          : 975,\n  \"beam_widths\": [100, 35, 35]\n  },  \n  {\"tiny_cutoff\": 13000,\n\
+          \  \"target_points\": 10000,\n  \"search_limit\": 145,\n  \"beam_widths\"\
+          : [130, 35, 130]\n  }  \n  ]\n"
+  parlayivf-no-sorted-queries:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          sorted_queries: 'False'
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 59000,\n\
+          \  \"target_points\": 32000,\n  \"search_limit\": 770,\n  \"beam_widths\"\
+          : [65, 60, 35]\n  },  \n  {\"tiny_cutoff\": 44000,\n  \"target_points\"\
+          : 16000,\n  \"search_limit\": 90,\n  \"beam_widths\": [95, 75, 75]\n  },\
+          \  \n  {\"tiny_cutoff\": 14000,\n  \"target_points\": 18000,\n  \"search_limit\"\
+          : 785,\n  \"beam_widths\": [35, 130, 35]\n  },  \n  {\"tiny_cutoff\": 28000,\n\
+          \  \"target_points\": 20000,\n  \"search_limit\": 410,\n  \"beam_widths\"\
+          : [130, 40, 40]\n  },  \n  {\"tiny_cutoff\": 21000,\n  \"target_points\"\
+          : 15000,\n  \"search_limit\": 70,\n  \"beam_widths\": [100, 125, 100]\n\
+          \  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\": 7000,\n  \"search_limit\"\
+          : 975,\n  \"beam_widths\": [100, 35, 35]\n  },  \n  {\"tiny_cutoff\": 13000,\n\
+          \  \"target_points\": 10000,\n  \"search_limit\": 145,\n  \"beam_widths\"\
+          : [130, 35, 130]\n  }  \n  ]\n"
+  parlayivf-no-weight-classes:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 1
+          - 1
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 59000,\n\
+          \  \"target_points\": 32000,\n  \"search_limit\": 770,\n  \"beam_widths\"\
+          : [65, 60, 35]\n  },  \n  {\"tiny_cutoff\": 44000,\n  \"target_points\"\
+          : 16000,\n  \"search_limit\": 90,\n  \"beam_widths\": [95, 75, 75]\n  },\
+          \  \n  {\"tiny_cutoff\": 14000,\n  \"target_points\": 18000,\n  \"search_limit\"\
+          : 785,\n  \"beam_widths\": [35, 130, 35]\n  },  \n  {\"tiny_cutoff\": 28000,\n\
+          \  \"target_points\": 20000,\n  \"search_limit\": 410,\n  \"beam_widths\"\
+          : [130, 40, 40]\n  },  \n  {\"tiny_cutoff\": 21000,\n  \"target_points\"\
+          : 15000,\n  \"search_limit\": 70,\n  \"beam_widths\": [100, 125, 100]\n\
+          \  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\": 7000,\n  \"search_limit\"\
+          : 975,\n  \"beam_widths\": [100, 35, 35]\n  },  \n  {\"tiny_cutoff\": 13000,\n\
+          \  \"target_points\": 10000,\n  \"search_limit\": 145,\n  \"beam_widths\"\
+          : [130, 35, 130]\n  }  \n  ]\n"
+msong:
+  parlayivf:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
+          max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
+          : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
+          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
+          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
+          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\"\n}]\n"
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 20000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 75,\n  \"beam_widths\"\
+          : [125, 90, 75]\n  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\"\
+          : 6000,\n  \"search_limit\": 160,\n  \"beam_widths\": [115, 95, 120]\n \
+          \ },  \n  {\"tiny_cutoff\": 64000,\n  \"target_points\": 15000,\n  \"search_limit\"\
+          : 135,\n  \"beam_widths\": [80, 50, 115]\n  },  \n  {\"tiny_cutoff\": 65000,\n\
+          \  \"target_points\": 18000,\n  \"search_limit\": 50,\n  \"beam_widths\"\
+          : [85, 30, 130]\n  },  \n  {\"tiny_cutoff\": 65000,\n  \"target_points\"\
+          : 21000,\n  \"search_limit\": 960,\n  \"beam_widths\": [120, 35, 30]\n \
+          \ },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\": 26000,\n  \"search_limit\"\
+          : 825,\n  \"beam_widths\": [115, 40, 120]\n  },  \n  {\"tiny_cutoff\": 73000,\n\
+          \  \"target_points\": 40000,\n  \"search_limit\": 55,\n  \"beam_widths\"\
+          : [125, 35, 120]\n  }  \n  ]\n"
+  parlayivf-no-bitvector:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 1000000000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 20000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 75,\n  \"beam_widths\"\
+          : [125, 90, 75]\n  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\"\
+          : 6000,\n  \"search_limit\": 160,\n  \"beam_widths\": [115, 95, 120]\n \
+          \ },  \n  {\"tiny_cutoff\": 64000,\n  \"target_points\": 15000,\n  \"search_limit\"\
+          : 135,\n  \"beam_widths\": [80, 50, 115]\n  },  \n  {\"tiny_cutoff\": 65000,\n\
+          \  \"target_points\": 18000,\n  \"search_limit\": 50,\n  \"beam_widths\"\
+          : [85, 30, 130]\n  },  \n  {\"tiny_cutoff\": 65000,\n  \"target_points\"\
+          : 21000,\n  \"search_limit\": 960,\n  \"beam_widths\": [120, 35, 30]\n \
+          \ },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\": 26000,\n  \"search_limit\"\
+          : 825,\n  \"beam_widths\": [115, 40, 120]\n  },  \n  {\"tiny_cutoff\": 73000,\n\
+          \  \"target_points\": 40000,\n  \"search_limit\": 55,\n  \"beam_widths\"\
+          : [125, 35, 120]\n  }  \n  ]\n"
+  parlayivf-no-material-join:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'False'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 20000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 75,\n  \"beam_widths\"\
+          : [125, 90, 75]\n  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\"\
+          : 6000,\n  \"search_limit\": 160,\n  \"beam_widths\": [115, 95, 120]\n \
+          \ },  \n  {\"tiny_cutoff\": 64000,\n  \"target_points\": 15000,\n  \"search_limit\"\
+          : 135,\n  \"beam_widths\": [80, 50, 115]\n  },  \n  {\"tiny_cutoff\": 65000,\n\
+          \  \"target_points\": 18000,\n  \"search_limit\": 50,\n  \"beam_widths\"\
+          : [85, 30, 130]\n  },  \n  {\"tiny_cutoff\": 65000,\n  \"target_points\"\
+          : 21000,\n  \"search_limit\": 960,\n  \"beam_widths\": [120, 35, 30]\n \
+          \ },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\": 26000,\n  \"search_limit\"\
+          : 825,\n  \"beam_widths\": [115, 40, 120]\n  },  \n  {\"tiny_cutoff\": 73000,\n\
+          \  \"target_points\": 40000,\n  \"search_limit\": 55,\n  \"beam_widths\"\
+          : [125, 35, 120]\n  }  \n  ]\n"
+  parlayivf-no-sorted-queries:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          sorted_queries: 'False'
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 20000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 75,\n  \"beam_widths\"\
+          : [125, 90, 75]\n  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\"\
+          : 6000,\n  \"search_limit\": 160,\n  \"beam_widths\": [115, 95, 120]\n \
+          \ },  \n  {\"tiny_cutoff\": 64000,\n  \"target_points\": 15000,\n  \"search_limit\"\
+          : 135,\n  \"beam_widths\": [80, 50, 115]\n  },  \n  {\"tiny_cutoff\": 65000,\n\
+          \  \"target_points\": 18000,\n  \"search_limit\": 50,\n  \"beam_widths\"\
+          : [85, 30, 130]\n  },  \n  {\"tiny_cutoff\": 65000,\n  \"target_points\"\
+          : 21000,\n  \"search_limit\": 960,\n  \"beam_widths\": [120, 35, 30]\n \
+          \ },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\": 26000,\n  \"search_limit\"\
+          : 825,\n  \"beam_widths\": [115, 40, 120]\n  },  \n  {\"tiny_cutoff\": 73000,\n\
+          \  \"target_points\": 40000,\n  \"search_limit\": 55,\n  \"beam_widths\"\
+          : [125, 35, 120]\n  }  \n  ]\n"
+  parlayivf-no-weight-classes:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 1
+          - 1
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 20000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 75,\n  \"beam_widths\"\
+          : [125, 90, 75]\n  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\"\
+          : 6000,\n  \"search_limit\": 160,\n  \"beam_widths\": [115, 95, 120]\n \
+          \ },  \n  {\"tiny_cutoff\": 64000,\n  \"target_points\": 15000,\n  \"search_limit\"\
+          : 135,\n  \"beam_widths\": [80, 50, 115]\n  },  \n  {\"tiny_cutoff\": 65000,\n\
+          \  \"target_points\": 18000,\n  \"search_limit\": 50,\n  \"beam_widths\"\
+          : [85, 30, 130]\n  },  \n  {\"tiny_cutoff\": 65000,\n  \"target_points\"\
+          : 21000,\n  \"search_limit\": 960,\n  \"beam_widths\": [120, 35, 30]\n \
+          \ },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\": 26000,\n  \"search_limit\"\
+          : 825,\n  \"beam_widths\": [115, 40, 120]\n  },  \n  {\"tiny_cutoff\": 73000,\n\
+          \  \"target_points\": 40000,\n  \"search_limit\": 55,\n  \"beam_widths\"\
+          : [125, 35, 120]\n  }  \n  ]\n"
+random-filter-s:
+  parlayivf:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
+          max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
+          : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
+          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
+          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
+          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\"\n}]\n"
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  }]\n"
+  parlayivf-no-bitvector:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 1000000000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  }]\n"
+  parlayivf-no-material-join:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'False'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  }]\n"
+  parlayivf-no-sorted-queries:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          sorted_queries: 'False'
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  }]\n"
+  parlayivf-no-weight-classes:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 1
+          - 1
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  }]\n"
 sift:
-    parlayivf:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
-            }]
-          query-args: |
-            [{"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 100000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-
-              {"tiny_cutoff": 69000,
-              "target_points": 5000,
-              "search_limit": 965,
-              "beam_widths": [90, 80, 30]
-              }, # 25 % Recall
-
-              {"tiny_cutoff": 79000,
-              "target_points": 6000,
-              "search_limit": 110,
-              "beam_widths": [80, 105, 85]
-              }, # 50 % Recall
-
-              {"tiny_cutoff": 12000,
-              "target_points": 14000,
-              "search_limit": 970,
-              "beam_widths": [130, 125, 65]
-              }, # 75 % Recall
-
-              {"tiny_cutoff": 84000,
-              "target_points": 17000,
-              "search_limit": 255,
-              "beam_widths": [85, 130, 125]
-              }, # 80 % Recall
-
-              {"tiny_cutoff": 46000,
-              "target_points": 21000,
-              "search_limit": 850,
-              "beam_widths": [115, 100, 110]
-              }, # 85 % Recall
-
-              {"tiny_cutoff": 90000,
-              "target_points": 27000,
-              "search_limit": 610,
-              "beam_widths": [85, 60, 55]
-              }, # 90 % Recall
-
-              {"tiny_cutoff": 36000,
-              "target_points": 38000,
-              "search_limit": 625,
-              "beam_widths": [105, 35, 130]
-              }, # 95 % Recall
-
-              ]
-
+  parlayivf:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
+          max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
+          : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
+          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
+          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
+          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\"\n}]\n"
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 69000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 965,\n  \"beam_widths\"\
+          : [90, 80, 30]\n  },  \n  {\"tiny_cutoff\": 79000,\n  \"target_points\"\
+          : 6000,\n  \"search_limit\": 110,\n  \"beam_widths\": [80, 105, 85]\n  },\
+          \  \n  {\"tiny_cutoff\": 12000,\n  \"target_points\": 14000,\n  \"search_limit\"\
+          : 970,\n  \"beam_widths\": [130, 125, 65]\n  },  \n  {\"tiny_cutoff\": 84000,\n\
+          \  \"target_points\": 17000,\n  \"search_limit\": 255,\n  \"beam_widths\"\
+          : [85, 130, 125]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
+          : 21000,\n  \"search_limit\": 850,\n  \"beam_widths\": [115, 100, 110]\n\
+          \  },  \n  {\"tiny_cutoff\": 90000,\n  \"target_points\": 27000,\n  \"search_limit\"\
+          : 610,\n  \"beam_widths\": [85, 60, 55]\n  },  \n  {\"tiny_cutoff\": 36000,\n\
+          \  \"target_points\": 38000,\n  \"search_limit\": 625,\n  \"beam_widths\"\
+          : [105, 35, 130]\n  }  \n  ]\n"
+  parlayivf-no-bitvector:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 1000000000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 69000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 965,\n  \"beam_widths\"\
+          : [90, 80, 30]\n  },  \n  {\"tiny_cutoff\": 79000,\n  \"target_points\"\
+          : 6000,\n  \"search_limit\": 110,\n  \"beam_widths\": [80, 105, 85]\n  },\
+          \  \n  {\"tiny_cutoff\": 12000,\n  \"target_points\": 14000,\n  \"search_limit\"\
+          : 970,\n  \"beam_widths\": [130, 125, 65]\n  },  \n  {\"tiny_cutoff\": 84000,\n\
+          \  \"target_points\": 17000,\n  \"search_limit\": 255,\n  \"beam_widths\"\
+          : [85, 130, 125]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
+          : 21000,\n  \"search_limit\": 850,\n  \"beam_widths\": [115, 100, 110]\n\
+          \  },  \n  {\"tiny_cutoff\": 90000,\n  \"target_points\": 27000,\n  \"search_limit\"\
+          : 610,\n  \"beam_widths\": [85, 60, 55]\n  },  \n  {\"tiny_cutoff\": 36000,\n\
+          \  \"target_points\": 38000,\n  \"search_limit\": 625,\n  \"beam_widths\"\
+          : [105, 35, 130]\n  }  \n  ]\n"
+  parlayivf-no-material-join:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'False'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 69000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 965,\n  \"beam_widths\"\
+          : [90, 80, 30]\n  },  \n  {\"tiny_cutoff\": 79000,\n  \"target_points\"\
+          : 6000,\n  \"search_limit\": 110,\n  \"beam_widths\": [80, 105, 85]\n  },\
+          \  \n  {\"tiny_cutoff\": 12000,\n  \"target_points\": 14000,\n  \"search_limit\"\
+          : 970,\n  \"beam_widths\": [130, 125, 65]\n  },  \n  {\"tiny_cutoff\": 84000,\n\
+          \  \"target_points\": 17000,\n  \"search_limit\": 255,\n  \"beam_widths\"\
+          : [85, 130, 125]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
+          : 21000,\n  \"search_limit\": 850,\n  \"beam_widths\": [115, 100, 110]\n\
+          \  },  \n  {\"tiny_cutoff\": 90000,\n  \"target_points\": 27000,\n  \"search_limit\"\
+          : 610,\n  \"beam_widths\": [85, 60, 55]\n  },  \n  {\"tiny_cutoff\": 36000,\n\
+          \  \"target_points\": 38000,\n  \"search_limit\": 625,\n  \"beam_widths\"\
+          : [105, 35, 130]\n  }  \n  ]\n"
+  parlayivf-no-sorted-queries:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          sorted_queries: 'False'
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 69000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 965,\n  \"beam_widths\"\
+          : [90, 80, 30]\n  },  \n  {\"tiny_cutoff\": 79000,\n  \"target_points\"\
+          : 6000,\n  \"search_limit\": 110,\n  \"beam_widths\": [80, 105, 85]\n  },\
+          \  \n  {\"tiny_cutoff\": 12000,\n  \"target_points\": 14000,\n  \"search_limit\"\
+          : 970,\n  \"beam_widths\": [130, 125, 65]\n  },  \n  {\"tiny_cutoff\": 84000,\n\
+          \  \"target_points\": 17000,\n  \"search_limit\": 255,\n  \"beam_widths\"\
+          : [85, 130, 125]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
+          : 21000,\n  \"search_limit\": 850,\n  \"beam_widths\": [115, 100, 110]\n\
+          \  },  \n  {\"tiny_cutoff\": 90000,\n  \"target_points\": 27000,\n  \"search_limit\"\
+          : 610,\n  \"beam_widths\": [85, 60, 55]\n  },  \n  {\"tiny_cutoff\": 36000,\n\
+          \  \"target_points\": 38000,\n  \"search_limit\": 625,\n  \"beam_widths\"\
+          : [105, 35, 130]\n  }  \n  ]\n"
+  parlayivf-no-weight-classes:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 1
+          - 1
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 69000,\n\
+          \  \"target_points\": 5000,\n  \"search_limit\": 965,\n  \"beam_widths\"\
+          : [90, 80, 30]\n  },  \n  {\"tiny_cutoff\": 79000,\n  \"target_points\"\
+          : 6000,\n  \"search_limit\": 110,\n  \"beam_widths\": [80, 105, 85]\n  },\
+          \  \n  {\"tiny_cutoff\": 12000,\n  \"target_points\": 14000,\n  \"search_limit\"\
+          : 970,\n  \"beam_widths\": [130, 125, 65]\n  },  \n  {\"tiny_cutoff\": 84000,\n\
+          \  \"target_points\": 17000,\n  \"search_limit\": 255,\n  \"beam_widths\"\
+          : [85, 130, 125]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
+          : 21000,\n  \"search_limit\": 850,\n  \"beam_widths\": [115, 100, 110]\n\
+          \  },  \n  {\"tiny_cutoff\": 90000,\n  \"target_points\": 27000,\n  \"search_limit\"\
+          : 610,\n  \"beam_widths\": [85, 60, 55]\n  },  \n  {\"tiny_cutoff\": 36000,\n\
+          \  \"target_points\": 38000,\n  \"search_limit\": 625,\n  \"beam_widths\"\
+          : [105, 35, 130]\n  }  \n  ]\n"
 uqv:
-    parlayivf:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
-            }]
-          query-args: |
-            [{"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 100000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-
-              {"tiny_cutoff": 56000,
-              "target_points": 39000,
-              "search_limit": 855,
-              "beam_widths": [90, 50, 65]
-              }, # 25 % Recall
-
-              {"tiny_cutoff": 46000,
-              "target_points": 32000,
-              "search_limit": 900,
-              "beam_widths": [80, 75, 55]
-              }, # 50 % Recall
-
-              {"tiny_cutoff": 18000,
-              "target_points": 7000,
-              "search_limit": 740,
-              "beam_widths": [115, 90, 90]
-              }, # 75 % Recall
-
-              {"tiny_cutoff": 94000,
-              "target_points": 18000,
-              "search_limit": 955,
-              "beam_widths": [115, 30, 40]
-              }, # 80 % Recall
-
-              {"tiny_cutoff": 24000,
-              "target_points": 20000,
-              "search_limit": 565,
-              "beam_widths": [55, 120, 75]
-              }, # 85 % Recall
-
-              {"tiny_cutoff": 60000,
-              "target_points": 33000,
-              "search_limit": 195,
-              "beam_widths": [120, 100, 110]
-              }, # 90 % Recall
-
-              {"tiny_cutoff": 15000,
-              "target_points": 16000,
-              "search_limit": 500,
-              "beam_widths": [45, 90, 130]
-              }, # 95 % Recall
-
-              ]
-              
+  parlayivf:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
+          max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
+          : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
+          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
+          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
+          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\"\n}]\n"
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 56000,\n\
+          \  \"target_points\": 39000,\n  \"search_limit\": 855,\n  \"beam_widths\"\
+          : [90, 50, 65]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
+          : 32000,\n  \"search_limit\": 900,\n  \"beam_widths\": [80, 75, 55]\n  },\
+          \  \n  {\"tiny_cutoff\": 18000,\n  \"target_points\": 7000,\n  \"search_limit\"\
+          : 740,\n  \"beam_widths\": [115, 90, 90]\n  },  \n  {\"tiny_cutoff\": 94000,\n\
+          \  \"target_points\": 18000,\n  \"search_limit\": 955,\n  \"beam_widths\"\
+          : [115, 30, 40]\n  },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\"\
+          : 20000,\n  \"search_limit\": 565,\n  \"beam_widths\": [55, 120, 75]\n \
+          \ },  \n  {\"tiny_cutoff\": 60000,\n  \"target_points\": 33000,\n  \"search_limit\"\
+          : 195,\n  \"beam_widths\": [120, 100, 110]\n  },  \n  {\"tiny_cutoff\":\
+          \ 15000,\n  \"target_points\": 16000,\n  \"search_limit\": 500,\n  \"beam_widths\"\
+          : [45, 90, 130]\n  }  \n  ]\n  \n"
+  parlayivf-no-bitvector:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 1000000000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 56000,\n\
+          \  \"target_points\": 39000,\n  \"search_limit\": 855,\n  \"beam_widths\"\
+          : [90, 50, 65]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
+          : 32000,\n  \"search_limit\": 900,\n  \"beam_widths\": [80, 75, 55]\n  },\
+          \  \n  {\"tiny_cutoff\": 18000,\n  \"target_points\": 7000,\n  \"search_limit\"\
+          : 740,\n  \"beam_widths\": [115, 90, 90]\n  },  \n  {\"tiny_cutoff\": 94000,\n\
+          \  \"target_points\": 18000,\n  \"search_limit\": 955,\n  \"beam_widths\"\
+          : [115, 30, 40]\n  },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\"\
+          : 20000,\n  \"search_limit\": 565,\n  \"beam_widths\": [55, 120, 75]\n \
+          \ },  \n  {\"tiny_cutoff\": 60000,\n  \"target_points\": 33000,\n  \"search_limit\"\
+          : 195,\n  \"beam_widths\": [120, 100, 110]\n  },  \n  {\"tiny_cutoff\":\
+          \ 15000,\n  \"target_points\": 16000,\n  \"search_limit\": 500,\n  \"beam_widths\"\
+          : [45, 90, 130]\n  }  \n  ]\n  \n"
+  parlayivf-no-material-join:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'False'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 56000,\n\
+          \  \"target_points\": 39000,\n  \"search_limit\": 855,\n  \"beam_widths\"\
+          : [90, 50, 65]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
+          : 32000,\n  \"search_limit\": 900,\n  \"beam_widths\": [80, 75, 55]\n  },\
+          \  \n  {\"tiny_cutoff\": 18000,\n  \"target_points\": 7000,\n  \"search_limit\"\
+          : 740,\n  \"beam_widths\": [115, 90, 90]\n  },  \n  {\"tiny_cutoff\": 94000,\n\
+          \  \"target_points\": 18000,\n  \"search_limit\": 955,\n  \"beam_widths\"\
+          : [115, 30, 40]\n  },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\"\
+          : 20000,\n  \"search_limit\": 565,\n  \"beam_widths\": [55, 120, 75]\n \
+          \ },  \n  {\"tiny_cutoff\": 60000,\n  \"target_points\": 33000,\n  \"search_limit\"\
+          : 195,\n  \"beam_widths\": [120, 100, 110]\n  },  \n  {\"tiny_cutoff\":\
+          \ 15000,\n  \"target_points\": 16000,\n  \"search_limit\": 500,\n  \"beam_widths\"\
+          : [45, 90, 130]\n  }  \n  ]\n  \n"
+  parlayivf-no-sorted-queries:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          sorted_queries: 'False'
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 56000,\n\
+          \  \"target_points\": 39000,\n  \"search_limit\": 855,\n  \"beam_widths\"\
+          : [90, 50, 65]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
+          : 32000,\n  \"search_limit\": 900,\n  \"beam_widths\": [80, 75, 55]\n  },\
+          \  \n  {\"tiny_cutoff\": 18000,\n  \"target_points\": 7000,\n  \"search_limit\"\
+          : 740,\n  \"beam_widths\": [115, 90, 90]\n  },  \n  {\"tiny_cutoff\": 94000,\n\
+          \  \"target_points\": 18000,\n  \"search_limit\": 955,\n  \"beam_widths\"\
+          : [115, 30, 40]\n  },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\"\
+          : 20000,\n  \"search_limit\": 565,\n  \"beam_widths\": [55, 120, 75]\n \
+          \ },  \n  {\"tiny_cutoff\": 60000,\n  \"target_points\": 33000,\n  \"search_limit\"\
+          : 195,\n  \"beam_widths\": [120, 100, 110]\n  },  \n  {\"tiny_cutoff\":\
+          \ 15000,\n  \"target_points\": 16000,\n  \"search_limit\": 500,\n  \"beam_widths\"\
+          : [45, 90, 130]\n  }  \n  ]\n  \n"
+  parlayivf-no-weight-classes:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 1
+          - 1
+        query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
+          beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 56000,\n\
+          \  \"target_points\": 39000,\n  \"search_limit\": 855,\n  \"beam_widths\"\
+          : [90, 50, 65]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
+          : 32000,\n  \"search_limit\": 900,\n  \"beam_widths\": [80, 75, 55]\n  },\
+          \  \n  {\"tiny_cutoff\": 18000,\n  \"target_points\": 7000,\n  \"search_limit\"\
+          : 740,\n  \"beam_widths\": [115, 90, 90]\n  },  \n  {\"tiny_cutoff\": 94000,\n\
+          \  \"target_points\": 18000,\n  \"search_limit\": 955,\n  \"beam_widths\"\
+          : [115, 30, 40]\n  },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\"\
+          : 20000,\n  \"search_limit\": 565,\n  \"beam_widths\": [55, 120, 75]\n \
+          \ },  \n  {\"tiny_cutoff\": 60000,\n  \"target_points\": 33000,\n  \"search_limit\"\
+          : 195,\n  \"beam_widths\": [120, 100, 110]\n  },  \n  {\"tiny_cutoff\":\
+          \ 15000,\n  \"target_points\": 16000,\n  \"search_limit\": 500,\n  \"beam_widths\"\
+          : [45, 90, 130]\n  }  \n  ]\n  \n"
 wiki-double-common:
-    parlayivf:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 180,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
-            }]
-          query-args: |
-            [{"target_points": 5000,
-              "tiny_cutoff": 30000,
-              "beam_widths": [85, 50, 95],
-              "search_limits": [500, 500, 500]
-              },
-              {"target_points": 7500,
-               "tiny_cutoff": 35000,
-               "beam_widths": [55, 55, 55]
-               },
-               {"target_points": 5000,
-              "tiny_cutoff": 28000,
-              "beam_widths": [90, 57, 90],
-              "search_limits": [500, 500, 500]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [60, 60, 60]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [90, 90, 90]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [90, 90, 90]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [50, 50, 50]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [50, 50, 50]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [40, 40, 40]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [40, 40, 40]
-              }]
+  parlayivf:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args: "[{\"cluster_size\": 5000, \n  \"T\": 180,\n  \"cutoff\": 10000,\n \
+          \ \"max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
+          : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
+          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
+          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
+          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\"\n}]\n"
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  }]\n"
+  parlayivf-no-bitvector:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 180
+          bitvector_cutoff: 1000000000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  }]\n"
+  parlayivf-no-material-join:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 180
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'False'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  }]\n"
+  parlayivf-no-sorted-queries:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 180
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          sorted_queries: 'False'
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  }]\n"
+  parlayivf-no-weight-classes:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 180
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 1
+          - 1
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  }]\n"
+yfcc-10M:
+  parlayivf:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
+          max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
+          : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
+          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
+          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
+          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\"\n}]\n"
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  }]\n"
+  parlayivf-no-bitvector:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 1000000000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  }]\n"
+  parlayivf-no-material-join:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'False'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  }]\n"
+  parlayivf-no-sorted-queries:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          sorted_queries: 'False'
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  }]\n"
+  parlayivf-no-weight-classes:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 8
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          cluster_size: 5000
+          cutoff: 10000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 1
+          - 1
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  }]\n"
