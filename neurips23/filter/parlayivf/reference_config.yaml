@@ -22,7 +22,8 @@ random-filter-s:
                                "limit": 200,
                                "alpha": 1.175}],
               "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
+              "materialize_joins": "True",
+              "join_cutoff": 20000
             }]
           query-args: |
             [{"target_points": 15000,
@@ -44,17 +45,18 @@ yfcc-10M:
               "cutoff": 10000,
               "max_iter": 10,
               "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
+              "build_params": [{"max_degree": 10,
                                 "limit": 200,
                                 "alpha": 1.175},
-                              {"max_degree": 10,
+                              {"max_degree": 12,
                                "limit": 200,
                                "alpha": 1.175},
-                              {"max_degree": 12,
+                              {"max_degree": 16,
                                "limit": 200,
                                "alpha": 1.175}],
               "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
+              "materialize_joins": "True",
+              "join_cutoff": 100000
             }]
           query-args: |
             [{"target_points": 5000,
@@ -98,6 +100,61 @@ yfcc-10M:
               {"target_points": 15000,
                "tiny_cutoff": 100000,
                "beam_widths": [40, 40, 40]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [250, 250, 250]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 10000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [35, 35, 35],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [25, 25, 25],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [15, 15, 15],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [10, 10, 10],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [25, 25, 25]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [15, 15, 15]
               }]
 
 crawl:
@@ -124,7 +181,8 @@ crawl:
                                "limit": 200,
                                "alpha": 1.175}],
               "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
+              "materialize_joins": "True",
+              "join_cutoff": 20000
             }]
           query-args: |
             [{"target_points": 15000,
@@ -142,6 +200,61 @@ crawl:
               {"target_points": 500000,
               "tiny_cutoff": 60000,
               "beam_widths": [70, 70, 70]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [250, 250, 250]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 10000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [35, 35, 35],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [25, 25, 25],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [15, 15, 15],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [10, 10, 10],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [25, 25, 25]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [15, 15, 15]
               }]
 
 enron:
@@ -168,7 +281,8 @@ enron:
                                "limit": 200,
                                "alpha": 0.1}],
               "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
+              "materialize_joins": "True",
+              "join_cutoff": 20000
             }]
           query-args: |
             [{"target_points": 15000,
@@ -214,7 +328,62 @@ enron:
               "target_points": 14000,
               "search_limit": 30,
               "beam_widths": [90, 115, 80]
-              }  
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [250, 250, 250]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 10000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [35, 35, 35],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [25, 25, 25],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [15, 15, 15],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [10, 10, 10],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [25, 25, 25]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [15, 15, 15]
+              } 
               ]
 
 gist:
@@ -241,7 +410,8 @@ gist:
                                "limit": 200,
                                "alpha": 1.175}],
               "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
+              "materialize_joins": "True",
+              "join_cutoff": 20000
             }]
           query-args: |
             [{"target_points": 15000,
@@ -287,7 +457,62 @@ gist:
               "target_points": 10000,
               "search_limit": 145,
               "beam_widths": [130, 35, 130]
-              }  
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [250, 250, 250]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 10000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [35, 35, 35],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [25, 25, 25],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [15, 15, 15],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [10, 10, 10],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [25, 25, 25]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [15, 15, 15]
+              }
               ]
 
 msong:
@@ -314,7 +539,8 @@ msong:
                                "limit": 200,
                                "alpha": 1.175}],
               "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
+              "materialize_joins": "True",
+              "join_cutoff": 20000
             }]
           query-args: |
             [{"target_points": 15000,
@@ -360,7 +586,62 @@ msong:
               "target_points": 40000,
               "search_limit": 55,
               "beam_widths": [125, 35, 120]
-              }  
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [250, 250, 250]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 10000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [35, 35, 35],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [25, 25, 25],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [15, 15, 15],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [10, 10, 10],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [25, 25, 25]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [15, 15, 15]
+              }
               ]
 
 audio:
@@ -387,7 +668,8 @@ audio:
                                "limit": 200,
                                "alpha": 0.1}],
               "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
+              "materialize_joins": "True",
+              "join_cutoff": 10000
             }]
           query-args: |
             [{"target_points": 15000,
@@ -433,7 +715,62 @@ audio:
               "target_points": 28000,
               "search_limit": 970,
               "beam_widths": [45, 125, 90]
-              }                
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [250, 250, 250]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 10000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [35, 35, 35],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [25, 25, 25],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [15, 15, 15],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [10, 10, 10],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [25, 25, 25]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [15, 15, 15]
+              }         
               ]
 
 sift:
@@ -460,7 +797,8 @@ sift:
                                "limit": 200,
                                "alpha": 1.175}],
               "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
+              "materialize_joins": "True",
+              "join_cutoff": 20000
             }]
           query-args: |
             [{"target_points": 15000,
@@ -506,7 +844,62 @@ sift:
               "target_points": 38000,
               "search_limit": 625,
               "beam_widths": [105, 35, 130]
-              }  
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [250, 250, 250]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 10000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [35, 35, 35],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [25, 25, 25],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [15, 15, 15],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [10, 10, 10],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [25, 25, 25]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [15, 15, 15]
+              }
               ]
 
 uqv:
@@ -533,7 +926,8 @@ uqv:
                                "limit": 200,
                                "alpha": 0.1}],
               "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
+              "materialize_joins": "True",
+              "join_cutoff": 20000
             }]
           query-args: |
             [{"target_points": 15000,
@@ -544,7 +938,6 @@ uqv:
               "tiny_cutoff": 60000,
               "beam_widths": [70, 70, 70]
               },
-
               {"tiny_cutoff": 56000,
               "target_points": 39000,
               "search_limit": 855,
@@ -579,7 +972,62 @@ uqv:
               "target_points": 16000,
               "search_limit": 500,
               "beam_widths": [45, 90, 130]
-              }  
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [250, 250, 250]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 10000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [35, 35, 35],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [25, 25, 25],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [15, 15, 15],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [10, 10, 10],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [25, 25, 25]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [15, 15, 15]
+              }
               ]
               
 wiki-double-common:
@@ -592,7 +1040,7 @@ wiki-double-common:
         base:
           args: |
             [{"cluster_size": 5000, 
-              "T": 180,
+              "T": 8,
               "cutoff": 10000,
               "max_iter": 10,
               "weight_classes": [100000, 400000],
@@ -606,7 +1054,8 @@ wiki-double-common:
                                "limit": 200,
                                "alpha": 0.1}],
               "bitvector_cutoff": 10000,
-              "materialize_joins": "True"
+              "materialize_joins": "True",
+              "join_cutoff": 250000
             }]
           query-args: |
             [{"target_points": 5000,
@@ -650,4 +1099,59 @@ wiki-double-common:
               {"target_points": 15000,
                "tiny_cutoff": 100000,
                "beam_widths": [40, 40, 40]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [250, 250, 250]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [100, 100, 100]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 10000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [35, 35, 35],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [25, 25, 25],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [15, 15, 15],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff": 5000,
+              "beam_widths": [10, 10, 10],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [50, 50, 50]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [25, 25, 25]
+              },
+              {"target_points": 2500,
+              "tiny_cutoff":5000,
+              "beam_widths": [5, 5, 5],
+              "search_limits": [15, 15, 15]
               }]

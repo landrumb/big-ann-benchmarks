@@ -42,8 +42,15 @@ class ParlayIVF(BaseFilterANN):
                 self._materialize_joins = True
             else:
                 raise Exception('Invalid materialize_joins parameter')
+            
+            if 'join_cutoff' in index_params:
+                self._join_cutoff = index_params['join_cutoff']
+            else:
+                self._join_cutoff = self._cutoff * 2
+
         else:
             self._materialize_joins = True
+            self._join_cutoff = self._cutoff * 2
 
         if 'sorted_queries' in index_params:
             if index_params['sorted_queries'] == 'False':
@@ -55,7 +62,7 @@ class ParlayIVF(BaseFilterANN):
         else:
             self._sorted_queries = True
 
-        self.name = f"parlayivf_{self._metric}_{self._cluster_size}_{self._cutoff}_{'materialized' if self._materialize_joins else 'unmaterialized'}"
+        self.name = f"parlayivf_{self._metric}_{self._cluster_size}_{self._cutoff}_{'materialized_' + str(self._join_cutoff) if self._materialize_joins else 'unmaterialized'}"
 
     def translate_dist_fn(self, metric):
         if metric == 'euclidean':
@@ -123,6 +130,16 @@ class ParlayIVF(BaseFilterANN):
     def set_beamsearch_params(self, k=10):
         for i in range(3):
             self.index.set_query_params(wp.QueryParams(k, self._beam_widths[i], 1.35, self._search_limits[i], self._max_degree[i]), i)
+
+    def sync_build_params(self):
+        self.index.set_max_iter(self._max_iter)
+        self.index.set_bitvector_cutoff(self._bitvector_cutoff)
+        self.index.set_materialized_joins(self._materialize_joins)
+
+        for i, bp in enumerate(self._build_params):
+            self.index.set_build_params(bp, i)
+
+        self.index.set_materialized_join_cutoff(self._join_cutoff)
         
     
     def fit(self, dataset):
@@ -138,17 +155,13 @@ class ParlayIVF(BaseFilterANN):
 
         self.index = wp.init_squared_ivf_index(self._metric, self.dtype)
 
-        self.index.set_max_iter(self._max_iter)
-        self.index.set_bitvector_cutoff(self._bitvector_cutoff)
-        self.index.set_materialized_joins(self._materialize_joins)
-
-        for i, bp in enumerate(self._build_params):
-            self.index.set_build_params(bp, i)
+        self.sync_build_params()
 
         print("Index initialized")
         self.index.fit_from_filename(ds.get_dataset_fn(), os.path.join(ds.basedir, ds.ds_metadata_fn), self._cutoff, self._cluster_size, str(self.create_index_dir(ds)), self._weight_classes, False)
         # self.index.print_stats()
         print(f"Index fit in {time.time() - start} seconds")
+        self._build_time = time.time() - start
 
     def load_index(self, dataset):
         """Note that because so many builds are actually loads, build and load are almost identical"""
@@ -162,12 +175,7 @@ class ParlayIVF(BaseFilterANN):
 
         self.index = wp.init_squared_ivf_index(self._metric, self.dtype)
 
-        self.index.set_max_iter(self._max_iter)
-        self.index.set_bitvector_cutoff(self._bitvector_cutoff)
-        self.index.set_materialized_joins(self._materialize_joins)
-
-        for i, bp in enumerate(self._build_params):
-            self.index.set_build_params(bp, i)
+        self.sync_build_params()
 
         print("Index initialized")
         self.index.fit_from_filename(ds.get_dataset_fn(), os.path.join(ds.basedir, ds.ds_metadata_fn), self._cutoff, self._cluster_size, str(self.create_index_dir(ds)), self._weight_classes, True)
