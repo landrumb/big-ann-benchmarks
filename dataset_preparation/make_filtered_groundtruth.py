@@ -4,8 +4,12 @@ import resource
 import threading
 import numpy as np
 from multiprocessing.pool import ThreadPool
+from tqdm import tqdm
 
 import faiss
+
+import sys
+sys.path.append("/home/ben/big-ann-benchmarks")
 
 import benchmark.datasets
 from benchmark.dataset_io import usbin_write
@@ -32,7 +36,7 @@ if __name__ == "__main__":
 
     group = parser.add_argument_group('computation options')
     aa('--k', default=100, type=int, help="number of nearest kNN neighbors to search")
-    aa("--maxRAM", default=100, type=int, help="set max RSS in GB (avoid OOM crash)")
+    aa("--maxRAM", default=1000, type=int, help="set max RSS in GB (avoid OOM crash)")
     aa('--nt', default=32, type=int, help="nb processes in thread pool")
     aa('--unfiltered', default=False, action="store_true",
         help="perform unfiltered queries")
@@ -56,6 +60,11 @@ if __name__ == "__main__":
         )
 
     ds = DATASETS[args.dataset]()
+    
+    if args.o == "/tmp/filtered_res":
+        args.o = ds.get_gt_fn()
+        
+    print(f"writing to {args.o}")
 
     print(ds)
 
@@ -65,7 +74,12 @@ if __name__ == "__main__":
         print("dataset ready")
 
     assert ds.search_type() in ("knn_filtered", "knn")
-    k = ds.default_count()
+    assert ds.distance() in ("ip", "euclidean")
+
+    metric = faiss.METRIC_INNER_PRODUCT if ds.distance() == "ip" else faiss.METRIC_L2
+
+    # k = ds.default_count()
+    k = args.k
     D = np.zeros((ds.nq, k), dtype='float32')
     I = -np.ones((ds.nq, k), dtype='int32')
 
@@ -81,11 +95,12 @@ if __name__ == "__main__":
 
     if args.unfiltered:
         print("performing unfiltered queries")
-        res = faiss.StandardGpuResources()
+        # res = faiss.StandardGpuResources()
         bs = 1024
-        for i0 in range(0, ds.nq, bs):
-            print(i0, '/', ds.nq, end="\r", flush=True)
-            D[i0:i0+bs], I[i0:i0+bs] = faiss.knn_gpu(res, xq[i0:i0+bs], xb, k)
+        for i0 in tqdm(range(0, ds.nq, bs)):
+            # print(i0, '/', ds.nq, end="\r", flush=True)
+            # D[i0:i0+bs], I[i0:i0+bs] = faiss.knn_gpu(res, xq[i0:i0+bs], xb, k)
+            D[i0:i0+bs], I[i0:i0+bs] = faiss.knn(xq[i0:i0+bs], xb, k, metric=metric)
     else:
         print("load dataset + query metadata")
         meta_b = ds.get_dataset_metadata()
@@ -116,7 +131,8 @@ if __name__ == "__main__":
             xb_subset = xb[docs]
             totsz[0] += docs.size
             totsz[1] += 1
-            Di, Ii = faiss.knn(xq[q : q + 1], xb_subset, k=k)
+            Di, Ii = faiss.knn(xq[q : q + 1], xb_subset, k=k, metric=metric)
+            # print(Di, Ii)
             D[q, :] = Di.ravel()
             I[q, :] = docs[Ii.ravel()]
             with lock:
