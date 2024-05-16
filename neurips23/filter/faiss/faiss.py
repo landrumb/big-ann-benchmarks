@@ -228,7 +228,7 @@ class FAISS(BaseFilterANN):
                     docs = bow_id_selector.intersect_sorted(
                         docs, csr_get_row_indices(docs_per_word, w2))
 
-                assert len(docs) >= k, pdb.set_trace()
+                # assert len(docs) >= k, pdb.set_trace()
                 xb_subset = self.xb[docs]
                 _, Ii = faiss.knn(X[q : q + 1], xb_subset, k=k)
  

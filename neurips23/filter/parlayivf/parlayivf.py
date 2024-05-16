@@ -178,6 +178,9 @@ class ParlayIVF(BaseFilterANN):
         self.sync_build_params()
 
         print("Index initialized")
+
+        print(ds.get_dataset_fn())
+
         self.index.fit_from_filename(ds.get_dataset_fn(), os.path.join(ds.basedir, ds.ds_metadata_fn), self._cutoff, self._cluster_size, str(self.create_index_dir(ds)), self._weight_classes, True)
         # self.index.print_stats()
         print(f"Index loaded in {time.time() - start} seconds")

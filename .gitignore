@@ -8,6 +8,8 @@ data/*
 *.log
 
 results/*
+ablation-results/*
+results-alt/*
 !results/*.png
 
 venv

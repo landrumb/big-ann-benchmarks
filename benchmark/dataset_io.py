@@ -102,7 +102,8 @@ def xbin_mmap(fname, dtype, maxn=-1):
     #    d = override_d
     # HACK
 
-    assert os.stat(fname).st_size == 8 + n * d * np.dtype(dtype).itemsize
+    if os.stat(fname).st_size != 8 + n * d * np.dtype(dtype).itemsize:
+        raise Exception(f"dataset size does not match the header, should be {8 + n * d * np.dtype(dtype).itemsize:,} but is {os.stat(fname).st_size:,} (dtype={dtype}, n={n}, d={d})")
     if maxn > 0:
         n = min(n, maxn)
     return np.memmap(fname, dtype=dtype, mode="r", offset=8, shape=(n, d))

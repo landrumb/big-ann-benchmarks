@@ -10,11 +10,11 @@ audio:
         args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
           max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
           : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
-          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
-          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \          \"alpha\": 0.1},\n                  {\"max_degree\": 10,\n  \
+          \                 \"limit\": 200,\n                   \"alpha\": 0.1},\n\
           \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
-          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
-          \  \"materialize_joins\": \"True\"\n}]\n"
+          \                   \"alpha\": 0.1}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\",\n  \"join_cutoff\": 10000\n}]\n"
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
           : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 36000,\n\
@@ -29,7 +29,26 @@ audio:
           \  \n  {\"tiny_cutoff\": 58000,\n  \"target_points\": 25000,\n  \"search_limit\"\
           : 240,\n  \"beam_widths\": [30, 130, 60]\n  },  \n  {\"tiny_cutoff\": 90000,\n\
           \  \"target_points\": 28000,\n  \"search_limit\": 970,\n  \"beam_widths\"\
-          : [45, 125, 90]\n  }                \n  ]\n"
+          : [45, 125, 90]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }         \n  ]\n"
   parlayivf-no-bitvector:
     base-args:
     - '@metric'
@@ -42,17 +61,18 @@ audio:
         - T: 8
           bitvector_cutoff: 1000000000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 10000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -72,7 +92,26 @@ audio:
           \  \n  {\"tiny_cutoff\": 58000,\n  \"target_points\": 25000,\n  \"search_limit\"\
           : 240,\n  \"beam_widths\": [30, 130, 60]\n  },  \n  {\"tiny_cutoff\": 90000,\n\
           \  \"target_points\": 28000,\n  \"search_limit\": 970,\n  \"beam_widths\"\
-          : [45, 125, 90]\n  }                \n  ]\n"
+          : [45, 125, 90]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }         \n  ]\n"
   parlayivf-no-material-join:
     base-args:
     - '@metric'
@@ -85,17 +124,18 @@ audio:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 10000
           materialize_joins: 'False'
           max_iter: 10
           weight_classes:
@@ -115,7 +155,26 @@ audio:
           \  \n  {\"tiny_cutoff\": 58000,\n  \"target_points\": 25000,\n  \"search_limit\"\
           : 240,\n  \"beam_widths\": [30, 130, 60]\n  },  \n  {\"tiny_cutoff\": 90000,\n\
           \  \"target_points\": 28000,\n  \"search_limit\": 970,\n  \"beam_widths\"\
-          : [45, 125, 90]\n  }                \n  ]\n"
+          : [45, 125, 90]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }         \n  ]\n"
   parlayivf-no-sorted-queries:
     base-args:
     - '@metric'
@@ -128,17 +187,18 @@ audio:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 10000
           materialize_joins: 'True'
           max_iter: 10
           sorted_queries: 'False'
@@ -159,7 +219,26 @@ audio:
           \  \n  {\"tiny_cutoff\": 58000,\n  \"target_points\": 25000,\n  \"search_limit\"\
           : 240,\n  \"beam_widths\": [30, 130, 60]\n  },  \n  {\"tiny_cutoff\": 90000,\n\
           \  \"target_points\": 28000,\n  \"search_limit\": 970,\n  \"beam_widths\"\
-          : [45, 125, 90]\n  }                \n  ]\n"
+          : [45, 125, 90]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }         \n  ]\n"
   parlayivf-no-weight-classes:
     base-args:
     - '@metric'
@@ -172,17 +251,18 @@ audio:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 10000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -202,7 +282,26 @@ audio:
           \  \n  {\"tiny_cutoff\": 58000,\n  \"target_points\": 25000,\n  \"search_limit\"\
           : 240,\n  \"beam_widths\": [30, 130, 60]\n  },  \n  {\"tiny_cutoff\": 90000,\n\
           \  \"target_points\": 28000,\n  \"search_limit\": 970,\n  \"beam_widths\"\
-          : [45, 125, 90]\n  }                \n  ]\n"
+          : [45, 125, 90]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }         \n  ]\n"
 crawl:
   parlayivf:
     base-args:
@@ -219,13 +318,32 @@ crawl:
           \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
           \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
           \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
-          \  \"materialize_joins\": \"True\"\n}]\n"
+          \  \"materialize_joins\": \"True\",\n  \"join_cutoff\": 20000\n}]\n"
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 10000,\n  \"tiny_cutoff\"\
           : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 50000,\n\
           \  \"tiny_cutoff\": 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"\
           target_points\": 500000,\n  \"tiny_cutoff\": 60000,\n  \"beam_widths\":\
-          \ [70, 70, 70]\n  }]\n"
+          \ [70, 70, 70]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
   parlayivf-no-bitvector:
     base-args:
     - '@metric'
@@ -249,6 +367,7 @@ crawl:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -259,7 +378,26 @@ crawl:
           : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 50000,\n\
           \  \"tiny_cutoff\": 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"\
           target_points\": 500000,\n  \"tiny_cutoff\": 60000,\n  \"beam_widths\":\
-          \ [70, 70, 70]\n  }]\n"
+          \ [70, 70, 70]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
   parlayivf-no-material-join:
     base-args:
     - '@metric'
@@ -283,6 +421,7 @@ crawl:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'False'
           max_iter: 10
           weight_classes:
@@ -293,7 +432,26 @@ crawl:
           : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 50000,\n\
           \  \"tiny_cutoff\": 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"\
           target_points\": 500000,\n  \"tiny_cutoff\": 60000,\n  \"beam_widths\":\
-          \ [70, 70, 70]\n  }]\n"
+          \ [70, 70, 70]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
   parlayivf-no-sorted-queries:
     base-args:
     - '@metric'
@@ -317,6 +475,7 @@ crawl:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           sorted_queries: 'False'
@@ -328,7 +487,26 @@ crawl:
           : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 50000,\n\
           \  \"tiny_cutoff\": 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"\
           target_points\": 500000,\n  \"tiny_cutoff\": 60000,\n  \"beam_widths\":\
-          \ [70, 70, 70]\n  }]\n"
+          \ [70, 70, 70]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
   parlayivf-no-weight-classes:
     base-args:
     - '@metric'
@@ -352,6 +530,7 @@ crawl:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -362,7 +541,26 @@ crawl:
           : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 50000,\n\
           \  \"tiny_cutoff\": 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"\
           target_points\": 500000,\n  \"tiny_cutoff\": 60000,\n  \"beam_widths\":\
-          \ [70, 70, 70]\n  }]\n"
+          \ [70, 70, 70]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
 enron:
   parlayivf:
     base-args:
@@ -375,11 +573,11 @@ enron:
         args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
           max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
           : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
-          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
-          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \          \"alpha\": 0.1},\n                  {\"max_degree\": 10,\n  \
+          \                 \"limit\": 200,\n                   \"alpha\": 0.1},\n\
           \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
-          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
-          \  \"materialize_joins\": \"True\"\n}]\n"
+          \                   \"alpha\": 0.1}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\",\n  \"join_cutoff\": 20000\n}]\n"
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
           : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 30000,\n\
@@ -394,7 +592,26 @@ enron:
           \ },  \n  {\"tiny_cutoff\": 15000,\n  \"target_points\": 9000,\n  \"search_limit\"\
           : 265,\n  \"beam_widths\": [115, 55, 50]\n  },  \n  {\"tiny_cutoff\": 17000,\n\
           \  \"target_points\": 14000,\n  \"search_limit\": 30,\n  \"beam_widths\"\
-          : [90, 115, 80]\n  }  \n  ]\n"
+          : [90, 115, 80]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  } \n  ]\n"
   parlayivf-no-bitvector:
     base-args:
     - '@metric'
@@ -407,17 +624,18 @@ enron:
         - T: 8
           bitvector_cutoff: 1000000000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -437,7 +655,26 @@ enron:
           \ },  \n  {\"tiny_cutoff\": 15000,\n  \"target_points\": 9000,\n  \"search_limit\"\
           : 265,\n  \"beam_widths\": [115, 55, 50]\n  },  \n  {\"tiny_cutoff\": 17000,\n\
           \  \"target_points\": 14000,\n  \"search_limit\": 30,\n  \"beam_widths\"\
-          : [90, 115, 80]\n  }  \n  ]\n"
+          : [90, 115, 80]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  } \n  ]\n"
   parlayivf-no-material-join:
     base-args:
     - '@metric'
@@ -450,17 +687,18 @@ enron:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'False'
           max_iter: 10
           weight_classes:
@@ -480,7 +718,26 @@ enron:
           \ },  \n  {\"tiny_cutoff\": 15000,\n  \"target_points\": 9000,\n  \"search_limit\"\
           : 265,\n  \"beam_widths\": [115, 55, 50]\n  },  \n  {\"tiny_cutoff\": 17000,\n\
           \  \"target_points\": 14000,\n  \"search_limit\": 30,\n  \"beam_widths\"\
-          : [90, 115, 80]\n  }  \n  ]\n"
+          : [90, 115, 80]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  } \n  ]\n"
   parlayivf-no-sorted-queries:
     base-args:
     - '@metric'
@@ -493,17 +750,18 @@ enron:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           sorted_queries: 'False'
@@ -524,7 +782,26 @@ enron:
           \ },  \n  {\"tiny_cutoff\": 15000,\n  \"target_points\": 9000,\n  \"search_limit\"\
           : 265,\n  \"beam_widths\": [115, 55, 50]\n  },  \n  {\"tiny_cutoff\": 17000,\n\
           \  \"target_points\": 14000,\n  \"search_limit\": 30,\n  \"beam_widths\"\
-          : [90, 115, 80]\n  }  \n  ]\n"
+          : [90, 115, 80]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  } \n  ]\n"
   parlayivf-no-weight-classes:
     base-args:
     - '@metric'
@@ -537,17 +814,18 @@ enron:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -567,7 +845,26 @@ enron:
           \ },  \n  {\"tiny_cutoff\": 15000,\n  \"target_points\": 9000,\n  \"search_limit\"\
           : 265,\n  \"beam_widths\": [115, 55, 50]\n  },  \n  {\"tiny_cutoff\": 17000,\n\
           \  \"target_points\": 14000,\n  \"search_limit\": 30,\n  \"beam_widths\"\
-          : [90, 115, 80]\n  }  \n  ]\n"
+          : [90, 115, 80]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  } \n  ]\n"
 gist:
   parlayivf:
     base-args:
@@ -584,7 +881,7 @@ gist:
           \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
           \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
           \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
-          \  \"materialize_joins\": \"True\"\n}]\n"
+          \  \"materialize_joins\": \"True\",\n  \"join_cutoff\": 20000\n}]\n"
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
           : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 59000,\n\
@@ -599,7 +896,26 @@ gist:
           \  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\": 7000,\n  \"search_limit\"\
           : 975,\n  \"beam_widths\": [100, 35, 35]\n  },  \n  {\"tiny_cutoff\": 13000,\n\
           \  \"target_points\": 10000,\n  \"search_limit\": 145,\n  \"beam_widths\"\
-          : [130, 35, 130]\n  }  \n  ]\n"
+          : [130, 35, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-bitvector:
     base-args:
     - '@metric'
@@ -623,6 +939,7 @@ gist:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -642,7 +959,26 @@ gist:
           \  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\": 7000,\n  \"search_limit\"\
           : 975,\n  \"beam_widths\": [100, 35, 35]\n  },  \n  {\"tiny_cutoff\": 13000,\n\
           \  \"target_points\": 10000,\n  \"search_limit\": 145,\n  \"beam_widths\"\
-          : [130, 35, 130]\n  }  \n  ]\n"
+          : [130, 35, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-material-join:
     base-args:
     - '@metric'
@@ -666,6 +1002,7 @@ gist:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'False'
           max_iter: 10
           weight_classes:
@@ -685,7 +1022,26 @@ gist:
           \  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\": 7000,\n  \"search_limit\"\
           : 975,\n  \"beam_widths\": [100, 35, 35]\n  },  \n  {\"tiny_cutoff\": 13000,\n\
           \  \"target_points\": 10000,\n  \"search_limit\": 145,\n  \"beam_widths\"\
-          : [130, 35, 130]\n  }  \n  ]\n"
+          : [130, 35, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-sorted-queries:
     base-args:
     - '@metric'
@@ -709,6 +1065,7 @@ gist:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           sorted_queries: 'False'
@@ -729,7 +1086,26 @@ gist:
           \  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\": 7000,\n  \"search_limit\"\
           : 975,\n  \"beam_widths\": [100, 35, 35]\n  },  \n  {\"tiny_cutoff\": 13000,\n\
           \  \"target_points\": 10000,\n  \"search_limit\": 145,\n  \"beam_widths\"\
-          : [130, 35, 130]\n  }  \n  ]\n"
+          : [130, 35, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-weight-classes:
     base-args:
     - '@metric'
@@ -753,6 +1129,7 @@ gist:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -772,7 +1149,26 @@ gist:
           \  },  \n  {\"tiny_cutoff\": 70000,\n  \"target_points\": 7000,\n  \"search_limit\"\
           : 975,\n  \"beam_widths\": [100, 35, 35]\n  },  \n  {\"tiny_cutoff\": 13000,\n\
           \  \"target_points\": 10000,\n  \"search_limit\": 145,\n  \"beam_widths\"\
-          : [130, 35, 130]\n  }  \n  ]\n"
+          : [130, 35, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
 msong:
   parlayivf:
     base-args:
@@ -789,7 +1185,7 @@ msong:
           \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
           \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
           \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
-          \  \"materialize_joins\": \"True\"\n}]\n"
+          \  \"materialize_joins\": \"True\",\n  \"join_cutoff\": 20000\n}]\n"
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
           : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 20000,\n\
@@ -804,7 +1200,26 @@ msong:
           \ },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\": 26000,\n  \"search_limit\"\
           : 825,\n  \"beam_widths\": [115, 40, 120]\n  },  \n  {\"tiny_cutoff\": 73000,\n\
           \  \"target_points\": 40000,\n  \"search_limit\": 55,\n  \"beam_widths\"\
-          : [125, 35, 120]\n  }  \n  ]\n"
+          : [125, 35, 120]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-bitvector:
     base-args:
     - '@metric'
@@ -828,6 +1243,7 @@ msong:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -847,7 +1263,26 @@ msong:
           \ },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\": 26000,\n  \"search_limit\"\
           : 825,\n  \"beam_widths\": [115, 40, 120]\n  },  \n  {\"tiny_cutoff\": 73000,\n\
           \  \"target_points\": 40000,\n  \"search_limit\": 55,\n  \"beam_widths\"\
-          : [125, 35, 120]\n  }  \n  ]\n"
+          : [125, 35, 120]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-material-join:
     base-args:
     - '@metric'
@@ -871,6 +1306,7 @@ msong:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'False'
           max_iter: 10
           weight_classes:
@@ -890,7 +1326,26 @@ msong:
           \ },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\": 26000,\n  \"search_limit\"\
           : 825,\n  \"beam_widths\": [115, 40, 120]\n  },  \n  {\"tiny_cutoff\": 73000,\n\
           \  \"target_points\": 40000,\n  \"search_limit\": 55,\n  \"beam_widths\"\
-          : [125, 35, 120]\n  }  \n  ]\n"
+          : [125, 35, 120]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-sorted-queries:
     base-args:
     - '@metric'
@@ -914,6 +1369,7 @@ msong:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           sorted_queries: 'False'
@@ -934,7 +1390,26 @@ msong:
           \ },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\": 26000,\n  \"search_limit\"\
           : 825,\n  \"beam_widths\": [115, 40, 120]\n  },  \n  {\"tiny_cutoff\": 73000,\n\
           \  \"target_points\": 40000,\n  \"search_limit\": 55,\n  \"beam_widths\"\
-          : [125, 35, 120]\n  }  \n  ]\n"
+          : [125, 35, 120]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-weight-classes:
     base-args:
     - '@metric'
@@ -958,6 +1433,7 @@ msong:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -977,7 +1453,26 @@ msong:
           \ },  \n  {\"tiny_cutoff\": 24000,\n  \"target_points\": 26000,\n  \"search_limit\"\
           : 825,\n  \"beam_widths\": [115, 40, 120]\n  },  \n  {\"tiny_cutoff\": 73000,\n\
           \  \"target_points\": 40000,\n  \"search_limit\": 55,\n  \"beam_widths\"\
-          : [125, 35, 120]\n  }  \n  ]\n"
+          : [125, 35, 120]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
 random-filter-s:
   parlayivf:
     base-args:
@@ -994,7 +1489,7 @@ random-filter-s:
           \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
           \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
           \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
-          \  \"materialize_joins\": \"True\"\n}]\n"
+          \  \"materialize_joins\": \"True\",\n  \"join_cutoff\": 20000\n}]\n"
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  }]\n"
   parlayivf-no-bitvector:
@@ -1020,6 +1515,7 @@ random-filter-s:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -1050,6 +1546,7 @@ random-filter-s:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'False'
           max_iter: 10
           weight_classes:
@@ -1080,6 +1577,7 @@ random-filter-s:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           sorted_queries: 'False'
@@ -1111,6 +1609,7 @@ random-filter-s:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -1134,7 +1633,7 @@ sift:
           \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
           \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
           \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
-          \  \"materialize_joins\": \"True\"\n}]\n"
+          \  \"materialize_joins\": \"True\",\n  \"join_cutoff\": 20000\n}]\n"
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
           : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 69000,\n\
@@ -1149,7 +1648,26 @@ sift:
           \  },  \n  {\"tiny_cutoff\": 90000,\n  \"target_points\": 27000,\n  \"search_limit\"\
           : 610,\n  \"beam_widths\": [85, 60, 55]\n  },  \n  {\"tiny_cutoff\": 36000,\n\
           \  \"target_points\": 38000,\n  \"search_limit\": 625,\n  \"beam_widths\"\
-          : [105, 35, 130]\n  }  \n  ]\n"
+          : [105, 35, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-bitvector:
     base-args:
     - '@metric'
@@ -1173,6 +1691,7 @@ sift:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -1192,7 +1711,26 @@ sift:
           \  },  \n  {\"tiny_cutoff\": 90000,\n  \"target_points\": 27000,\n  \"search_limit\"\
           : 610,\n  \"beam_widths\": [85, 60, 55]\n  },  \n  {\"tiny_cutoff\": 36000,\n\
           \  \"target_points\": 38000,\n  \"search_limit\": 625,\n  \"beam_widths\"\
-          : [105, 35, 130]\n  }  \n  ]\n"
+          : [105, 35, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-material-join:
     base-args:
     - '@metric'
@@ -1216,6 +1754,7 @@ sift:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'False'
           max_iter: 10
           weight_classes:
@@ -1235,7 +1774,26 @@ sift:
           \  },  \n  {\"tiny_cutoff\": 90000,\n  \"target_points\": 27000,\n  \"search_limit\"\
           : 610,\n  \"beam_widths\": [85, 60, 55]\n  },  \n  {\"tiny_cutoff\": 36000,\n\
           \  \"target_points\": 38000,\n  \"search_limit\": 625,\n  \"beam_widths\"\
-          : [105, 35, 130]\n  }  \n  ]\n"
+          : [105, 35, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-sorted-queries:
     base-args:
     - '@metric'
@@ -1259,6 +1817,7 @@ sift:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           sorted_queries: 'False'
@@ -1279,7 +1838,26 @@ sift:
           \  },  \n  {\"tiny_cutoff\": 90000,\n  \"target_points\": 27000,\n  \"search_limit\"\
           : 610,\n  \"beam_widths\": [85, 60, 55]\n  },  \n  {\"tiny_cutoff\": 36000,\n\
           \  \"target_points\": 38000,\n  \"search_limit\": 625,\n  \"beam_widths\"\
-          : [105, 35, 130]\n  }  \n  ]\n"
+          : [105, 35, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
   parlayivf-no-weight-classes:
     base-args:
     - '@metric'
@@ -1303,6 +1881,7 @@ sift:
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -1322,7 +1901,26 @@ sift:
           \  },  \n  {\"tiny_cutoff\": 90000,\n  \"target_points\": 27000,\n  \"search_limit\"\
           : 610,\n  \"beam_widths\": [85, 60, 55]\n  },  \n  {\"tiny_cutoff\": 36000,\n\
           \  \"target_points\": 38000,\n  \"search_limit\": 625,\n  \"beam_widths\"\
-          : [105, 35, 130]\n  }  \n  ]\n"
+          : [105, 35, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\":\
+          \ 30000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100,\
+          \ 100]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n \
+          \ \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n \
+          \ \"tiny_cutoff\": 5000,\n  \"beam_widths\": [35, 35, 35],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [15, 15, 15],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          :5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\"\
+          : [5, 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n"
 uqv:
   parlayivf:
     base-args:
@@ -1335,14 +1933,14 @@ uqv:
         args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
           max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
           : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
-          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
-          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \          \"alpha\": 0.1},\n                  {\"max_degree\": 10,\n  \
+          \                 \"limit\": 200,\n                   \"alpha\": 0.1},\n\
           \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
-          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
-          \  \"materialize_joins\": \"True\"\n}]\n"
+          \                   \"alpha\": 0.1}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\",\n  \"join_cutoff\": 20000\n}]\n"
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
-          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 56000,\n\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"tiny_cutoff\": 56000,\n\
           \  \"target_points\": 39000,\n  \"search_limit\": 855,\n  \"beam_widths\"\
           : [90, 50, 65]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
           : 32000,\n  \"search_limit\": 900,\n  \"beam_widths\": [80, 75, 55]\n  },\
@@ -1354,7 +1952,26 @@ uqv:
           \ },  \n  {\"tiny_cutoff\": 60000,\n  \"target_points\": 33000,\n  \"search_limit\"\
           : 195,\n  \"beam_widths\": [120, 100, 110]\n  },  \n  {\"tiny_cutoff\":\
           \ 15000,\n  \"target_points\": 16000,\n  \"search_limit\": 500,\n  \"beam_widths\"\
-          : [45, 90, 130]\n  }  \n  ]\n  \n"
+          : [45, 90, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n  \n"
   parlayivf-no-bitvector:
     base-args:
     - '@metric'
@@ -1367,17 +1984,18 @@ uqv:
         - T: 8
           bitvector_cutoff: 1000000000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -1385,7 +2003,7 @@ uqv:
           - 400000
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
-          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 56000,\n\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"tiny_cutoff\": 56000,\n\
           \  \"target_points\": 39000,\n  \"search_limit\": 855,\n  \"beam_widths\"\
           : [90, 50, 65]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
           : 32000,\n  \"search_limit\": 900,\n  \"beam_widths\": [80, 75, 55]\n  },\
@@ -1397,7 +2015,26 @@ uqv:
           \ },  \n  {\"tiny_cutoff\": 60000,\n  \"target_points\": 33000,\n  \"search_limit\"\
           : 195,\n  \"beam_widths\": [120, 100, 110]\n  },  \n  {\"tiny_cutoff\":\
           \ 15000,\n  \"target_points\": 16000,\n  \"search_limit\": 500,\n  \"beam_widths\"\
-          : [45, 90, 130]\n  }  \n  ]\n  \n"
+          : [45, 90, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n  \n"
   parlayivf-no-material-join:
     base-args:
     - '@metric'
@@ -1410,17 +2047,18 @@ uqv:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'False'
           max_iter: 10
           weight_classes:
@@ -1428,7 +2066,7 @@ uqv:
           - 400000
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
-          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 56000,\n\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"tiny_cutoff\": 56000,\n\
           \  \"target_points\": 39000,\n  \"search_limit\": 855,\n  \"beam_widths\"\
           : [90, 50, 65]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
           : 32000,\n  \"search_limit\": 900,\n  \"beam_widths\": [80, 75, 55]\n  },\
@@ -1440,7 +2078,26 @@ uqv:
           \ },  \n  {\"tiny_cutoff\": 60000,\n  \"target_points\": 33000,\n  \"search_limit\"\
           : 195,\n  \"beam_widths\": [120, 100, 110]\n  },  \n  {\"tiny_cutoff\":\
           \ 15000,\n  \"target_points\": 16000,\n  \"search_limit\": 500,\n  \"beam_widths\"\
-          : [45, 90, 130]\n  }  \n  ]\n  \n"
+          : [45, 90, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n  \n"
   parlayivf-no-sorted-queries:
     base-args:
     - '@metric'
@@ -1453,17 +2110,18 @@ uqv:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           sorted_queries: 'False'
@@ -1472,7 +2130,7 @@ uqv:
           - 400000
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
-          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 56000,\n\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"tiny_cutoff\": 56000,\n\
           \  \"target_points\": 39000,\n  \"search_limit\": 855,\n  \"beam_widths\"\
           : [90, 50, 65]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
           : 32000,\n  \"search_limit\": 900,\n  \"beam_widths\": [80, 75, 55]\n  },\
@@ -1484,7 +2142,26 @@ uqv:
           \ },  \n  {\"tiny_cutoff\": 60000,\n  \"target_points\": 33000,\n  \"search_limit\"\
           : 195,\n  \"beam_widths\": [120, 100, 110]\n  },  \n  {\"tiny_cutoff\":\
           \ 15000,\n  \"target_points\": 16000,\n  \"search_limit\": 500,\n  \"beam_widths\"\
-          : [45, 90, 130]\n  }  \n  ]\n  \n"
+          : [45, 90, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n  \n"
   parlayivf-no-weight-classes:
     base-args:
     - '@metric'
@@ -1497,17 +2174,18 @@ uqv:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 20000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -1515,7 +2193,7 @@ uqv:
           - 1
         query-args: "[{\"target_points\": 15000,\n  \"tiny_cutoff\": 60000,\n  \"\
           beam_widths\": [70, 70, 70]\n  },\n  {\"target_points\": 100000,\n  \"tiny_cutoff\"\
-          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n\n  {\"tiny_cutoff\": 56000,\n\
+          : 60000,\n  \"beam_widths\": [70, 70, 70]\n  },\n  {\"tiny_cutoff\": 56000,\n\
           \  \"target_points\": 39000,\n  \"search_limit\": 855,\n  \"beam_widths\"\
           : [90, 50, 65]\n  },  \n  {\"tiny_cutoff\": 46000,\n  \"target_points\"\
           : 32000,\n  \"search_limit\": 900,\n  \"beam_widths\": [80, 75, 55]\n  },\
@@ -1527,213 +2205,27 @@ uqv:
           \ },  \n  {\"tiny_cutoff\": 60000,\n  \"target_points\": 33000,\n  \"search_limit\"\
           : 195,\n  \"beam_widths\": [120, 100, 110]\n  },  \n  {\"tiny_cutoff\":\
           \ 15000,\n  \"target_points\": 16000,\n  \"search_limit\": 500,\n  \"beam_widths\"\
-          : [45, 90, 130]\n  }  \n  ]\n  \n"
+          : [45, 90, 130]\n  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n\
+          \  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [250, 250, 250]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n\
+          \  \"beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n \
+          \ },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }\n  ]\n  \n"
 wiki-double-common:
-  parlayivf:
-    base-args:
-    - '@metric'
-    constructor: ParlayIVF
-    docker-tag: neurips23-filter-parlayivf
-    module: neurips23.filter.parlayivf.parlayivf
-    run-groups:
-      base:
-        args: "[{\"cluster_size\": 5000, \n  \"T\": 180,\n  \"cutoff\": 10000,\n \
-          \ \"max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
-          : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
-          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
-          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
-          \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
-          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
-          \  \"materialize_joins\": \"True\"\n}]\n"
-        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
-          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
-          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
-          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
-          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
-          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
-          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
-          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
-          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
-          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
-          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
-          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
-          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
-          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
-          \  }]\n"
-  parlayivf-no-bitvector:
-    base-args:
-    - '@metric'
-    constructor: ParlayIVF
-    docker-tag: neurips23-filter-parlayivf
-    module: neurips23.filter.parlayivf.parlayivf
-    run-groups:
-      base:
-        args:
-        - T: 180
-          bitvector_cutoff: 1000000000
-          build_params:
-          - alpha: 1.175
-            limit: 200
-            max_degree: 8
-          - alpha: 1.175
-            limit: 200
-            max_degree: 10
-          - alpha: 1.175
-            limit: 200
-            max_degree: 12
-          cluster_size: 5000
-          cutoff: 10000
-          materialize_joins: 'True'
-          max_iter: 10
-          weight_classes:
-          - 100000
-          - 400000
-        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
-          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
-          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
-          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
-          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
-          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
-          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
-          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
-          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
-          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
-          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
-          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
-          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
-          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
-          \  }]\n"
-  parlayivf-no-material-join:
-    base-args:
-    - '@metric'
-    constructor: ParlayIVF
-    docker-tag: neurips23-filter-parlayivf
-    module: neurips23.filter.parlayivf.parlayivf
-    run-groups:
-      base:
-        args:
-        - T: 180
-          bitvector_cutoff: 10000
-          build_params:
-          - alpha: 1.175
-            limit: 200
-            max_degree: 8
-          - alpha: 1.175
-            limit: 200
-            max_degree: 10
-          - alpha: 1.175
-            limit: 200
-            max_degree: 12
-          cluster_size: 5000
-          cutoff: 10000
-          materialize_joins: 'False'
-          max_iter: 10
-          weight_classes:
-          - 100000
-          - 400000
-        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
-          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
-          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
-          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
-          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
-          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
-          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
-          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
-          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
-          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
-          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
-          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
-          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
-          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
-          \  }]\n"
-  parlayivf-no-sorted-queries:
-    base-args:
-    - '@metric'
-    constructor: ParlayIVF
-    docker-tag: neurips23-filter-parlayivf
-    module: neurips23.filter.parlayivf.parlayivf
-    run-groups:
-      base:
-        args:
-        - T: 180
-          bitvector_cutoff: 10000
-          build_params:
-          - alpha: 1.175
-            limit: 200
-            max_degree: 8
-          - alpha: 1.175
-            limit: 200
-            max_degree: 10
-          - alpha: 1.175
-            limit: 200
-            max_degree: 12
-          cluster_size: 5000
-          cutoff: 10000
-          materialize_joins: 'True'
-          max_iter: 10
-          sorted_queries: 'False'
-          weight_classes:
-          - 100000
-          - 400000
-        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
-          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
-          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
-          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
-          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
-          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
-          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
-          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
-          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
-          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
-          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
-          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
-          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
-          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
-          \  }]\n"
-  parlayivf-no-weight-classes:
-    base-args:
-    - '@metric'
-    constructor: ParlayIVF
-    docker-tag: neurips23-filter-parlayivf
-    module: neurips23.filter.parlayivf.parlayivf
-    run-groups:
-      base:
-        args:
-        - T: 180
-          bitvector_cutoff: 10000
-          build_params:
-          - alpha: 1.175
-            limit: 200
-            max_degree: 8
-          - alpha: 1.175
-            limit: 200
-            max_degree: 10
-          - alpha: 1.175
-            limit: 200
-            max_degree: 12
-          cluster_size: 5000
-          cutoff: 10000
-          materialize_joins: 'True'
-          max_iter: 10
-          weight_classes:
-          - 1
-          - 1
-        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
-          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
-          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
-          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
-          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
-          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
-          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
-          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
-          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
-          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
-          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
-          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
-          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
-          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
-          \  }]\n"
-yfcc-10M:
   parlayivf:
     base-args:
     - '@metric'
@@ -1745,11 +2237,11 @@ yfcc-10M:
         args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
           max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
           : [{\"max_degree\": 8,\n                    \"limit\": 200,\n          \
-          \          \"alpha\": 1.175},\n                  {\"max_degree\": 10,\n\
-          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \          \"alpha\": 0.1},\n                  {\"max_degree\": 10,\n  \
+          \                 \"limit\": 200,\n                   \"alpha\": 0.1},\n\
           \                  {\"max_degree\": 12,\n                   \"limit\": 200,\n\
-          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
-          \  \"materialize_joins\": \"True\"\n}]\n"
+          \                   \"alpha\": 0.1}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\",\n  \"join_cutoff\": 250000\n}]\n"
         query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
           : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
           : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
@@ -1764,7 +2256,26 @@ yfcc-10M:
           beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
           : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
           \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
-          \  }]\n"
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [250, 250, 250]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
   parlayivf-no-bitvector:
     base-args:
     - '@metric'
@@ -1777,17 +2288,18 @@ yfcc-10M:
         - T: 8
           bitvector_cutoff: 1000000000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 250000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -1807,7 +2319,26 @@ yfcc-10M:
           beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
           : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
           \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
-          \  }]\n"
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [250, 250, 250]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
   parlayivf-no-material-join:
     base-args:
     - '@metric'
@@ -1820,17 +2351,18 @@ yfcc-10M:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 250000
           materialize_joins: 'False'
           max_iter: 10
           weight_classes:
@@ -1850,7 +2382,26 @@ yfcc-10M:
           beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
           : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
           \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
-          \  }]\n"
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [250, 250, 250]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
   parlayivf-no-sorted-queries:
     base-args:
     - '@metric'
@@ -1863,17 +2414,18 @@ yfcc-10M:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 250000
           materialize_joins: 'True'
           max_iter: 10
           sorted_queries: 'False'
@@ -1894,7 +2446,26 @@ yfcc-10M:
           beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
           : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
           \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
-          \  }]\n"
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [250, 250, 250]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
   parlayivf-no-weight-classes:
     base-args:
     - '@metric'
@@ -1907,17 +2478,18 @@ yfcc-10M:
         - T: 8
           bitvector_cutoff: 10000
           build_params:
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 8
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 10
-          - alpha: 1.175
+          - alpha: 0.1
             limit: 200
             max_degree: 12
           cluster_size: 5000
           cutoff: 10000
+          join_cutoff: 250000
           materialize_joins: 'True'
           max_iter: 10
           weight_classes:
@@ -1937,4 +2509,327 @@ yfcc-10M:
           beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
           : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
           \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
-          \  }]\n"
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [250, 250, 250]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
+yfcc-10M:
+  parlayivf:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args: "[{\"cluster_size\": 5000, \n  \"T\": 8,\n  \"cutoff\": 10000,\n  \"\
+          max_iter\": 10,\n  \"weight_classes\": [100000, 400000],\n  \"build_params\"\
+          : [{\"max_degree\": 10,\n                    \"limit\": 200,\n         \
+          \           \"alpha\": 1.175},\n                  {\"max_degree\": 12,\n\
+          \                   \"limit\": 200,\n                   \"alpha\": 1.175},\n\
+          \                  {\"max_degree\": 16,\n                   \"limit\": 200,\n\
+          \                   \"alpha\": 1.175}],\n  \"bitvector_cutoff\": 10000,\n\
+          \  \"materialize_joins\": \"True\",\n  \"join_cutoff\": 100000\n}]\n"
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [250, 250, 250]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
+  parlayivf-no-bitvector:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 1000000000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          - alpha: 1.175
+            limit: 200
+            max_degree: 16
+          cluster_size: 5000
+          cutoff: 10000
+          join_cutoff: 100000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [250, 250, 250]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
+  parlayivf-no-material-join:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          - alpha: 1.175
+            limit: 200
+            max_degree: 16
+          cluster_size: 5000
+          cutoff: 10000
+          join_cutoff: 100000
+          materialize_joins: 'False'
+          max_iter: 10
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [250, 250, 250]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
+  parlayivf-no-sorted-queries:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          - alpha: 1.175
+            limit: 200
+            max_degree: 16
+          cluster_size: 5000
+          cutoff: 10000
+          join_cutoff: 100000
+          materialize_joins: 'True'
+          max_iter: 10
+          sorted_queries: 'False'
+          weight_classes:
+          - 100000
+          - 400000
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [250, 250, 250]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"
+  parlayivf-no-weight-classes:
+    base-args:
+    - '@metric'
+    constructor: ParlayIVF
+    docker-tag: neurips23-filter-parlayivf
+    module: neurips23.filter.parlayivf.parlayivf
+    run-groups:
+      base:
+        args:
+        - T: 8
+          bitvector_cutoff: 10000
+          build_params:
+          - alpha: 1.175
+            limit: 200
+            max_degree: 10
+          - alpha: 1.175
+            limit: 200
+            max_degree: 12
+          - alpha: 1.175
+            limit: 200
+            max_degree: 16
+          cluster_size: 5000
+          cutoff: 10000
+          join_cutoff: 100000
+          materialize_joins: 'True'
+          max_iter: 10
+          weight_classes:
+          - 1
+          - 1
+        query-args: "[{\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 7500,\n   \"tiny_cutoff\": 35000,\n   \"beam_widths\": [55, 55, 55]\n\
+          \   },\n   {\"target_points\": 5000,\n  \"tiny_cutoff\": 28000,\n  \"beam_widths\"\
+          : [90, 57, 90],\n  \"search_limits\": [500, 500, 500]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [60, 60, 60]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\"\
+          : [90, 90, 90]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\":\
+          \ 100000,\n   \"beam_widths\": [90, 90, 90]\n  },\n  {\"target_points\"\
+          : 15000,\n   \"tiny_cutoff\": 60000,\n   \"beam_widths\": [50, 50, 50]\n\
+          \  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\": 100000,\n   \"\
+          beam_widths\": [50, 50, 50]\n  },\n  {\"target_points\": 15000,\n   \"tiny_cutoff\"\
+          : 60000,\n   \"beam_widths\": [40, 40, 40]\n  },\n  {\"target_points\":\
+          \ 15000,\n   \"tiny_cutoff\": 100000,\n   \"beam_widths\": [40, 40, 40]\n\
+          \  },\n  {\"target_points\": 5000,\n  \"tiny_cutoff\": 30000,\n  \"beam_widths\"\
+          : [85, 50, 95],\n  \"search_limits\": [100, 100, 100]\n  },\n  {\"target_points\"\
+          : 5000,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"\
+          search_limits\": [250, 250, 250]\n  },\n  {\"target_points\": 2500,\n  \"\
+          tiny_cutoff\": 5000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\"\
+          : [100, 100, 100]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 10000,\n  \"beam_widths\": [85, 50, 95],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"\
+          beam_widths\": [35, 35, 35],\n  \"search_limits\": [50, 50, 50]\n  },\n\
+          \  {\"target_points\": 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\"\
+          : [25, 25, 25],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\": 5000,\n  \"beam_widths\": [15, 15, 15],\n  \"\
+          search_limits\": [50, 50, 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\"\
+          : 5000,\n  \"beam_widths\": [10, 10, 10],\n  \"search_limits\": [50, 50,\
+          \ 50]\n  },\n  {\"target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"\
+          beam_widths\": [5, 5, 5],\n  \"search_limits\": [50, 50, 50]\n  },\n  {\"\
+          target_points\": 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5,\
+          \ 5, 5],\n  \"search_limits\": [25, 25, 25]\n  },\n  {\"target_points\"\
+          : 2500,\n  \"tiny_cutoff\":5000,\n  \"beam_widths\": [5, 5, 5],\n  \"search_limits\"\
+          : [15, 15, 15]\n  }]\n"

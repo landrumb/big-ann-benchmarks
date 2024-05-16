@@ -29,7 +29,7 @@ from benchmark.streaming.load_runbook import load_runbook
 def run(definition, dataset, count, run_count, rebuild,
         upload_index=False, download_index=False,
         blob_prefix="", sas_string="", private_query=False,
-        neurips23track="none", runbook_path="neurips23/streaming/simple_runbook.yaml"):
+        neurips23track="none", runbook_path="neurips23/streaming/simple_runbook.yaml", query_sets=[]):
     algo = instantiate_algorithm(definition)
     assert not definition.query_argument_groups \
            or hasattr(algo, "set_query_arguments"), """\
@@ -87,41 +87,44 @@ def run(definition, dataset, count, run_count, rebuild,
                 upload_accelerated(local_dir, remote_location,
                                    index_prefix + component, sas_string)
         else:
-            print("Starting query")
-            query_argument_groups = definition.query_argument_groups
-            # Make sure that algorithms with no query argument groups still get run
-            # once by providing them with a single, empty, harmless group
-            if not query_argument_groups:
-                query_argument_groups = [[]]
+            if len(query_sets) == 0:
+                print("Starting query")
+                query_argument_groups = definition.query_argument_groups
+                # Make sure that algorithms with no query argument groups still get run
+                # once by providing them with a single, empty, harmless group
+                if not query_argument_groups:
+                    query_argument_groups = [[]]
 
-            for pos, query_arguments in enumerate(query_argument_groups, 1):
-                print("Running query argument group %d of %d..." %
-                      (pos, len(query_argument_groups)))
-                if query_arguments:
-                    algo.set_query_arguments(*query_arguments)
-                if neurips23track == 'streaming':
-                    descriptor, results = custom_runner.run_task(
-                        algo, ds, distance, count, 1, search_type, private_query, runbook)
-                else:
-                    descriptor, results = custom_runner.run_task(
-                        algo, ds, distance, count, run_count, search_type, private_query)
-
-                descriptor["build_time"] = build_time
-                descriptor["index_size"] = index_size
-                descriptor["algo"] = definition.algorithm
-                descriptor["dataset"] = dataset
-                if power_capture.enabled():
-                    if not private_query:
-                        X = ds.get_queries()
+                for pos, query_arguments in enumerate(query_argument_groups, 1):
+                    print("Running query argument group %d of %d..." %
+                        (pos, len(query_argument_groups)))
+                    if query_arguments:
+                        algo.set_query_arguments(*query_arguments)
+                    if neurips23track == 'streaming':
+                        descriptor, results = custom_runner.run_task(
+                            algo, ds, distance, count, 1, search_type, private_query, runbook)
                     else:
-                        X = ds.get_private_queries()
-                    power_stats = power_capture.run(algo, X, distance, count,
-                                                    run_count, search_type, descriptor)
-                print('start store results')
-                store_results(dataset, count, definition,
-                              query_arguments, descriptor,
-                              results, search_type, neurips23track, runbook_path)
-                print('end store results')
+                        descriptor, results = custom_runner.run_task(
+                            algo, ds, distance, count, run_count, search_type, private_query)
+
+                    descriptor["build_time"] = build_time
+                    descriptor["index_size"] = index_size
+                    descriptor["algo"] = definition.algorithm
+                    descriptor["dataset"] = dataset
+                    if power_capture.enabled():
+                        if not private_query:
+                            X = ds.get_queries()
+                        else:
+                            X = ds.get_private_queries()
+                        power_stats = power_capture.run(algo, X, distance, count,
+                                                        run_count, search_type, descriptor)
+                    print('start store results')
+                    store_results(dataset, count, definition,
+                                query_arguments, descriptor,
+                                results, search_type, neurips23track, runbook_path)
+                    print('end store results')
+            else:
+                raise NotImplementedError("Alternate query sets not supported yet")
     finally:
         algo.done()
 
@@ -205,11 +208,19 @@ def run_from_cmdline(args=None):
         help='runbook yaml path for neurips23 streaming track',
         default='neurips23/streaming/simple_runbook.yaml'
     )
+    parser.add_argument(
+        '--query_sets',
+        help='names of alternate query sets to use',
+        nargs='*',
+        default=[]
+    )
 
     args = parser.parse_args(args)
     algo_args = json.loads(args.build)
     print(algo_args)
     query_args = [json.loads(q) for q in args.queries]
+
+    query_sets = args.query_sets
 
     if args.power_capture:
         power_capture( args.power_capture )
@@ -227,7 +238,7 @@ def run_from_cmdline(args=None):
     )
     run(definition, args.dataset, args.count, args.runs, args.rebuild,
         args.upload_index, args.download_index, args.blob_prefix, args.sas_string,
-        args.private_query, args.neurips23track, args.runbook_path)
+        args.private_query, args.neurips23track, args.runbook_path, query_sets)
 
 
 def run_docker(definition, dataset, count, runs, timeout, rebuild,

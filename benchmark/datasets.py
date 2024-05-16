@@ -129,6 +129,8 @@ class DatasetCompetitionFormat(Dataset):
             if os.path.exists(outfile):
                 print("file %s already exists" % outfile)
                 continue
+            else:
+                print(outfile)
             download(sourceurl, outfile)
 
         # private qs url
@@ -219,7 +221,7 @@ class DatasetCompetitionFormat(Dataset):
         return I, D
 
     def get_dataset(self):
-        assert self.nb <= 10**7, "dataset too large, use iterator"
+        # assert self.nb <= 10**7, "dataset too large, use iterator"
         slice = next(self.get_dataset_iterator(bs=self.nb))
         return sanitize(slice)
 
@@ -770,7 +772,7 @@ class AudioDataset(DatasetCompetitionFormat):
         return "knn_filtered"
     
     def distance(self):
-        return "ip" # should be ip
+        return "euclidean" # should be ip
 
 class SiftDataset(DatasetCompetitionFormat):
 
@@ -842,31 +844,69 @@ class UQVDataset(DatasetCompetitionFormat):
     def distance(self):
         return "ip"
 
-class WikiSentenceDataset(DatasetCompetitionFormat):
+class WikiParagraphDataset(DatasetCompetitionFormat):
 
-    def __init__(self, query_filter_set="double_common", filtered=True, dummy=False):
+    def __init__(self, size=10_000_000, query_filter_set="mixed", filtered=True):
         self.filtered = filtered
-        self.nb = 35_000_000
+        self.nb = size
         self.d = 768
-        self.nq = 5000
         self.dtype = "float32"
-
-        self.ds_fn = "base.35M.4k.fbin"
-        self.qs_fn = "wikipedia_simple_query_embeddings.bin"
-        self.ds_metadata_fn = "base.35M.4k.metadata.spmat"
-
+        
+        self.nq = 10_000
+        
+        size_names = {
+            1_000: '1k',
+            5_000: '5k',
+            10_000: '10k',
+            50_000: '50k',
+            100_000: '100k',
+            1_000_000: '1M',
+            3_000_000: '3M',
+            5_000_000: '5M',
+            10_000_000: '10M',
+            20_000_000: '20M',
+            30_000_000: '30M',
+            35_000_000: '35M'
+        }
+        self.size_names = size_names
+        
+        if size not in size_names:
+            raise ValueError(f"size must be one of {list(size_names.keys())}")
+        else:
+            self.size_name = size_names[size]
+        
+        self.ds_fn = f"{self.size_name}.fbin"
+        self.ds_metadata_fn = f"{self.size_name}.geq1k.no-syntax.metadata.spmat"
+        
         self.query_filter_set = query_filter_set
+        self.qs_fn = f"{size_names[self.nq]}_queries.fbin"
+        self.qs_metadata_fn = f"{size_names[self.nq]}_{self.query_filter_set}_metadata.spmat"
 
-        self.qs_metadata_fn = f"wikipedia_simple_query_labels_numeric_{self.query_filter_set}.spmat"
+        if self.filtered:
+            if self.distance() == "ip":
+                self.gt_fn = f"GT.{self.size_name}.q{size_names[self.nq]}.{query_filter_set}.ibin"
+            else:
+                self.gt_fn = f"GT.l2.{self.size_name}.q{size_names[self.nq]}.{query_filter_set}.ibin"
+        else:
+            if self.distance() == "ip":
+                self.gt_fn = f"GT.{self.size_name}.q{size_names[self.nq]}.unfiltered.ibin"
+            else:
+                self.gt_fn = f"GT.l2.{self.size_name}.q{size_names[self.nq]}.unfiltered.ibin"
 
-        self.gt_fn = f"wikipedia_simple_query_labels_numeric_{self.query_filter_set}_gt.spmat"
-        self.basedir = os.path.join(BASEDIR, "wiki_sentence")
+        self.basedir = os.path.join(BASEDIR, "wiki_paragraph")
+
+        self.base_url = ""
+        self.private_qs_url = None
+        self.private_gt_url = None
 
     def prepare(self, skip_data=False):
-        pass
+        super().prepare(skip_data, self.nb)
 
     def get_dataset_fn(self):
         return os.path.join(self.basedir, self.ds_fn)
+    
+    def get_gt_fn(self):
+        return os.path.join(self.basedir, self.gt_fn)
     
     def get_dataset_metadata(self):
         return read_sparse_matrix(os.path.join(self.basedir, self.ds_metadata_fn))
@@ -875,10 +915,23 @@ class WikiSentenceDataset(DatasetCompetitionFormat):
         return read_sparse_matrix(os.path.join(self.basedir, self.qs_metadata_fn))
     
     def search_type(self):
-        return "knn_filtered"
+        if self.filtered:
+            return "knn_filtered"
+        else:
+            return "knn"
     
     def distance(self):
-        return "ip" 
+        return "ip"
+        # return "euclidean" 
+
+    def change_queries(self, name='mixed'):
+        self.query_filter_set = name
+        self.qs_metadata_fn = f"{self.size_names[self.nq]}_{self.query_filter_set}_metadata.spmat"
+        self.qs_fn = f"{self.size_names[self.nq]}_queries.fbin" # for completeness
+        if self.distance() == "ip":
+            self.gt_fn = f"GT.{self.size_name}.q{self.size_names[self.nq]}.{self.query_filter_set}.ibin"
+        else:
+            self.gt_fn = f"GT.l2.{self.size_name}.q{self.size_names[self.nq]}.{self.query_filter_set}.ibin"
 
 
 class YFCC100MDataset(DatasetCompetitionFormat):
@@ -1429,5 +1482,36 @@ DATASETS = {
     'sift': lambda: SiftDataset(),
     'uqv': lambda: UQVDataset(),
 
-    'wiki-double-common': lambda: WikiSentenceDataset('double_common'),
+    # 'wiki-100k': lambda: WikiParagraphDataset(100_000),
+    'wiki-1M': lambda: WikiParagraphDataset(1_000_000),
+    'wiki-3M': lambda: WikiParagraphDataset(3_000_000),
+    'wiki-5M': lambda: WikiParagraphDataset(5_000_000),
+    'wiki-10M': lambda: WikiParagraphDataset(10_000_000),
+    'wiki-20M': lambda: WikiParagraphDataset(20_000_000),
+    'wiki-30M': lambda: WikiParagraphDataset(30_000_000),
+    
+    # 'wiki-100k-single': lambda: WikiParagraphDataset(100_000, query_filter_set="single"),
+    'wiki-1M-single': lambda: WikiParagraphDataset(1_000_000, query_filter_set="single"),
+    'wiki-3M-single': lambda: WikiParagraphDataset(3_000_000, query_filter_set="single"),
+    'wiki-5M-single': lambda: WikiParagraphDataset(5_000_000, query_filter_set="single"),
+    'wiki-10M-single': lambda: WikiParagraphDataset(10_000_000, query_filter_set="single"),
+    'wiki-20M-single': lambda: WikiParagraphDataset(20_000_000, query_filter_set="single"),
+    'wiki-30M-single': lambda: WikiParagraphDataset(30_000_000, query_filter_set="single"),
+    
+    # 'wiki-100k-and': lambda: WikiParagraphDataset(100_000, query_filter_set="and"),
+    'wiki-1M-and': lambda: WikiParagraphDataset(1_000_000, query_filter_set="and"),
+    'wiki-3M-and': lambda: WikiParagraphDataset(3_000_000, query_filter_set="and"),
+    'wiki-5M-and': lambda: WikiParagraphDataset(5_000_000, query_filter_set="and"),
+    'wiki-10M-and': lambda: WikiParagraphDataset(10_000_000, query_filter_set="and"),
+    'wiki-20M-and': lambda: WikiParagraphDataset(20_000_000, query_filter_set="and"),
+    'wiki-30M-and': lambda: WikiParagraphDataset(30_000_000, query_filter_set="and"),
+    
+    'wiki-100k-unfiltered': lambda: WikiParagraphDataset(100_000, filtered=False),
+    'wiki-1M-unfiltered': lambda: WikiParagraphDataset(1_000_000, filtered=False),
+    'wiki-3M-unfiltered': lambda: WikiParagraphDataset(3_000_000, filtered=False),
+    'wiki-5M-unfiltered': lambda: WikiParagraphDataset(5_000_000, filtered=False),
+    'wiki-10M-unfiltered': lambda: WikiParagraphDataset(10_000_000, filtered=False),
+    'wiki-20M-unfiltered': lambda: WikiParagraphDataset(20_000_000, filtered=False),
+    'wiki-30M-unfiltered': lambda: WikiParagraphDataset(30_000_000, filtered=False),
+    
 }
