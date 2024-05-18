@@ -52,7 +52,8 @@ def run_worker(args, queue):
                           args.t3, args.power_capture,
                           args.upload_index, args.download_index,
                           args.blob_prefix, args.sas_string,
-                          args.private_query, args.neurips23track, args.runbook_path)
+                          args.private_query, args.neurips23track, args.runbook_path,
+                          args.query_sets)
 
         else:
             run_docker(definition, args.dataset, args.count,
@@ -60,7 +61,8 @@ def run_worker(args, queue):
                        args.t3, args.power_capture,
                        args.upload_index, args.download_index,
                        args.blob_prefix, args.sas_string,
-                       args.private_query, args.neurips23track, args.runbook_path)
+                       args.private_query, args.neurips23track, args.runbook_path,
+                       query_sets=args.query_sets)
 
 
 def main():
@@ -166,8 +168,16 @@ def main():
         help='runbook yaml path for neurips23 streaming track',
         default='neurips23/streaming/simple_runbook.yaml'
     )
+    parser.add_argument(
+        '--query_sets',
+        help='query sets to run',
+        default=[],
+        nargs='*',
+        type=str
+    )
 
     args = parser.parse_args()
+
     if args.timeout == -1:
         args.timeout = None
 

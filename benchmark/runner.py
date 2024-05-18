@@ -124,7 +124,44 @@ def run(definition, dataset, count, run_count, rebuild,
                                 results, search_type, neurips23track, runbook_path)
                     print('end store results')
             else:
-                raise NotImplementedError("Alternate query sets not supported yet")
+                # raise NotImplementedError("success")
+                for dataset in query_sets:
+                    print(f"Starting query with query set {dataset}")
+                    ds = DATASETS[dataset]()
+                    query_argument_groups = definition.query_argument_groups
+                    # Make sure that algorithms with no query argument groups still get run
+                    # once by providing them with a single, empty, harmless group
+                    if not query_argument_groups:
+                        query_argument_groups = [[]]
+
+                    for pos, query_arguments in enumerate(query_argument_groups, 1):
+                        print("Running query argument group %d of %d..." %
+                            (pos, len(query_argument_groups)))
+                        if query_arguments:
+                            algo.set_query_arguments(*query_arguments)
+                        if neurips23track == 'streaming':
+                            descriptor, results = custom_runner.run_task(
+                                algo, ds, distance, count, 1, search_type, private_query, runbook)
+                        else:
+                            descriptor, results = custom_runner.run_task(
+                                algo, ds, distance, count, run_count, search_type, private_query)
+
+                        descriptor["build_time"] = build_time
+                        descriptor["index_size"] = index_size
+                        descriptor["algo"] = definition.algorithm
+                        descriptor["dataset"] = dataset
+                        if power_capture.enabled():
+                            if not private_query:
+                                X = ds.get_queries()
+                            else:
+                                X = ds.get_private_queries()
+                            power_stats = power_capture.run(algo, X, distance, count,
+                                                            run_count, search_type, descriptor)
+                        print('start store results')
+                        store_results(dataset, count, definition,
+                                    query_arguments, descriptor,
+                                    results, search_type, neurips23track, runbook_path)
+                        print('end store results')
     finally:
         algo.done()
 
@@ -215,7 +252,10 @@ def run_from_cmdline(args=None):
         default=[]
     )
 
+
     args = parser.parse_args(args)
+
+    # raise RuntimeError(args)
     algo_args = json.loads(args.build)
     print(algo_args)
     query_args = [json.loads(q) for q in args.queries]
@@ -246,13 +286,14 @@ def run_docker(definition, dataset, count, runs, timeout, rebuild,
                t3=None, power_capture=None,
                upload_index=False, download_index=False,
                blob_prefix="", sas_string="", private_query=False,
-               neurips23track='none', runbook_path='neurips23/streaming/simple_runbook.yaml'):
+               neurips23track='none', runbook_path='neurips23/streaming/simple_runbook.yaml', query_sets=[]):
     cmd = ['--dataset', dataset,
            '--algorithm', definition.algorithm,
            '--module', definition.module,
            '--constructor', definition.constructor,
            '--runs', str(runs),
-           '--count', str(count)]
+           '--count', str(count),
+           '--query_sets', *query_sets]
     if power_capture:
         cmd += ["--power-capture", power_capture ]
     if rebuild:
