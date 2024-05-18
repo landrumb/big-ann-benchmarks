@@ -209,7 +209,10 @@ class DatasetCompetitionFormat(Dataset):
 
     def get_groundtruth(self, k=None):
         assert self.gt_fn is not None
-        fn = self.gt_fn.split("/")[-1]   # in case it's a URL
+        if self.gt_fn.startswith("https://"):
+            fn = self.gt_fn.split("/")[-1]   # in case it's a URL
+        else:
+            fn = self.gt_fn
         assert self.search_type() in ("knn", "knn_filtered")
 
         I, D = knn_result_read(os.path.join(self.basedir, fn))
@@ -845,6 +848,20 @@ class UQVDataset(DatasetCompetitionFormat):
         return "ip"
 
 class WikiParagraphDataset(DatasetCompetitionFormat):
+    size_names = {
+        1_000: '1k',
+        5_000: '5k',
+        10_000: '10k',
+        50_000: '50k',
+        100_000: '100k',
+        1_000_000: '1M',
+        3_000_000: '3M',
+        5_000_000: '5M',
+        10_000_000: '10M',
+        20_000_000: '20M',
+        30_000_000: '30M',
+        35_000_000: '35M'
+    }
 
     def __init__(self, size=10_000_000, query_filter_set="mixed", filtered=True):
         self.filtered = filtered
@@ -854,20 +871,8 @@ class WikiParagraphDataset(DatasetCompetitionFormat):
         
         self.nq = 10_000
         
-        size_names = {
-            1_000: '1k',
-            5_000: '5k',
-            10_000: '10k',
-            50_000: '50k',
-            100_000: '100k',
-            1_000_000: '1M',
-            3_000_000: '3M',
-            5_000_000: '5M',
-            10_000_000: '10M',
-            20_000_000: '20M',
-            30_000_000: '30M',
-            35_000_000: '35M'
-        }
+        size_names = WikiParagraphDataset.size_names
+        
         self.size_names = size_names
         
         if size not in size_names:
@@ -906,8 +911,11 @@ class WikiParagraphDataset(DatasetCompetitionFormat):
         return os.path.join(self.basedir, self.ds_fn)
     
     def get_gt_fn(self):
-        return os.path.join(self.basedir, self.gt_fn)
-    
+        if os.path.exists(os.path.join(self.basedir, self.gt_fn)):
+            return os.path.join(self.basedir, self.gt_fn)
+        else:
+            raise FileNotFoundError(f"Ground truth file {self.gt_fn} not found.")
+
     def get_dataset_metadata(self):
         return read_sparse_matrix(os.path.join(self.basedir, self.ds_metadata_fn))
 
@@ -933,6 +941,15 @@ class WikiParagraphDataset(DatasetCompetitionFormat):
         else:
             self.gt_fn = f"GT.l2.{self.size_name}.q{self.size_names[self.nq]}.{self.query_filter_set}.ibin"
 
+    def subset_queries(self, base_prefix):
+        self.qs_fn = f"{base_prefix}.fbin"
+        self.qs_metadata_fn = f"{base_prefix}_metadata.spmat"
+        # reading the length of the queries
+        self.nq = np.fromfile(os.path.join(self.basedir, self.qs_metadata_fn), dtype='int32', count=1)[0]
+        print(f"subset queries: {self.nq}")
+        self.gt_fn = f"{base_prefix}.GT.ibin"
+
+        # print(self.qs_fn, self.qs_metadata_fn, self.gt_fn)
 
 class YFCC100MDataset(DatasetCompetitionFormat):
     """ the 2023 competition """
@@ -1489,6 +1506,7 @@ DATASETS = {
     'wiki-10M': lambda: WikiParagraphDataset(10_000_000),
     'wiki-20M': lambda: WikiParagraphDataset(20_000_000),
     'wiki-30M': lambda: WikiParagraphDataset(30_000_000),
+    'wiki-35M': lambda: WikiParagraphDataset(35_000_000),
     
     # 'wiki-100k-single': lambda: WikiParagraphDataset(100_000, query_filter_set="single"),
     'wiki-1M-single': lambda: WikiParagraphDataset(1_000_000, query_filter_set="single"),
@@ -1515,3 +1533,27 @@ DATASETS = {
     'wiki-30M-unfiltered': lambda: WikiParagraphDataset(30_000_000, filtered=False),
     
 }
+
+import re
+
+name_sizes = {v: k for k, v in WikiParagraphDataset.size_names.items()}
+
+pattern = r'(\d+[Mk])[-.](\w+?)(?=[_.])'
+
+# we add all the subset datasets
+query_subset_dir = os.path.join(BASEDIR, "wiki_paragraph", "query_subsets")
+for fn in os.listdir(query_subset_dir):
+    if not fn.endswith(".fbin"):
+        continue
+    prefix = fn[:-5]
+
+    def generate_subset(prefix):
+        regex_matches = re.search(pattern, prefix).groups()
+        original_size = name_sizes[regex_matches[0]]
+        ds = WikiParagraphDataset(size=original_size)
+        ds.subset_queries(os.path.join('query_subsets', prefix))
+        return ds
+
+    DATASETS[prefix] = lambda p=prefix: generate_subset(p)
+
+print(DATASETS.keys())
