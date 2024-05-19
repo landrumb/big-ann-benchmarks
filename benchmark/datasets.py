@@ -251,6 +251,11 @@ class DatasetCompetitionFormat(Dataset):
             I = I[:, :k]
             D = D[:, :k]
         return I, D
+    
+    def get_gt_fn(self):
+        if not os.path.exists(os.path.join(self.basedir, self.gt_fn)):
+            print(f"Ground truth file {self.gt_fn} not found.")
+        return os.path.join(self.basedir, self.gt_fn)
 
 subset_url = "https://dl.fbaipublicfiles.com/billion-scale-ann-benchmarks/"
 
@@ -909,12 +914,6 @@ class WikiParagraphDataset(DatasetCompetitionFormat):
 
     def get_dataset_fn(self):
         return os.path.join(self.basedir, self.ds_fn)
-    
-    def get_gt_fn(self):
-        if os.path.exists(os.path.join(self.basedir, self.gt_fn)):
-            return os.path.join(self.basedir, self.gt_fn)
-        else:
-            raise FileNotFoundError(f"Ground truth file {self.gt_fn} not found.")
 
     def get_dataset_metadata(self):
         return read_sparse_matrix(os.path.join(self.basedir, self.ds_metadata_fn))
@@ -1036,6 +1035,16 @@ class YFCC100MDataset(DatasetCompetitionFormat):
             return "knn_filtered"
         else:
             return "knn"
+        
+    def subset_queries(self, base_prefix):
+        self.qs_fn = f"{base_prefix}.fbin"
+        self.qs_metadata_fn = f"{base_prefix}_metadata.spmat"
+        print(self.basedir)
+        print()
+        # reading the length of the queries
+        self.nq = np.fromfile(os.path.join(self.basedir, self.qs_metadata_fn), dtype='int32', count=1)[0]
+        print(f"subset queries: {self.nq}")
+        self.gt_fn = f"{base_prefix}.GT.ibin"
 
 
 def _strip_gz(filename):
@@ -1538,22 +1547,24 @@ import re
 
 name_sizes = {v: k for k, v in WikiParagraphDataset.size_names.items()}
 
-pattern = r'(\d+[Mk])[-.](\w+?)(?=[_.])'
+pattern = r'(\d+[Mk])[-._](\w+?)(?=[-._]|$)'
 
 # we add all the subset datasets
-query_subset_dir = os.path.join(BASEDIR, "wiki_paragraph", "query_subsets")
-for fn in os.listdir(query_subset_dir):
-    if not fn.endswith(".fbin"):
-        continue
-    prefix = fn[:-5]
+for dataset in ['wiki_paragraph', 'yfcc100M']:
+    query_subset_dir = os.path.join(BASEDIR, dataset, "query_subsets")
+    for fn in os.listdir(query_subset_dir):
+        if not fn.endswith(".fbin"):
+            continue
+        prefix = fn[:-5]
 
-    def generate_subset(prefix):
-        regex_matches = re.search(pattern, prefix).groups()
-        original_size = name_sizes[regex_matches[0]]
-        ds = WikiParagraphDataset(size=original_size)
-        ds.subset_queries(os.path.join('query_subsets', prefix))
-        return ds
+        def generate_subset(prefix):
+            regex_matches = re.search(pattern, prefix).groups()
+            original_size = name_sizes[regex_matches[0]]
+            ds = WikiParagraphDataset(size=original_size) if dataset == 'wiki_paragraph' else YFCC100MDataset()
+            
+            ds.subset_queries(os.path.join('query_subsets', prefix))
+            return ds
 
-    DATASETS[prefix] = lambda p=prefix: generate_subset(p)
+        DATASETS[prefix] = lambda p=prefix: generate_subset(p)
 
 print(DATASETS.keys())
