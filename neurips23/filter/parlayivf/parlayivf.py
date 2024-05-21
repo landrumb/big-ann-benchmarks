@@ -9,6 +9,7 @@ from neurips23.filter.base import BaseFilterANN
 from benchmark.datasets import DATASETS
 from benchmark.dataset_io import download_accelerated
 
+
 class ParlayIVF(BaseFilterANN):
 
     def __init__(self, metric, index_params, *args):
@@ -24,8 +25,10 @@ class ParlayIVF(BaseFilterANN):
         self._max_iter = int(index_params['max_iter'])
 
         self._weight_classes = tuple(index_params['weight_classes'])
-        self._build_params = tuple([wp.BuildParams(int(d['max_degree']), int(d['limit']), float(d['alpha'])) for d in index_params['build_params']]) # tuple of BuildParams objects
-        self._max_degree = tuple([int(d['max_degree']) for d in index_params['build_params']]) 
+        self._build_params = tuple([wp.BuildParams(int(d['max_degree']), int(d['limit']), float(
+            d['alpha'])) for d in index_params['build_params']])  # tuple of BuildParams objects
+        self._max_degree = tuple([int(d['max_degree'])
+                                 for d in index_params['build_params']])
 
         if 'bitvector_cutoff' in index_params:
             self._bitvector_cutoff = index_params['bitvector_cutoff']
@@ -33,8 +36,9 @@ class ParlayIVF(BaseFilterANN):
             self._bitvector_cutoff = self._cutoff
 
         if 'T' in index_params:
-            os.environ['PARLAY_NUM_THREADS'] = str(min(int(index_params['T']), os.cpu_count()))
-        
+            os.environ['PARLAY_NUM_THREADS'] = str(
+                min(int(index_params['T']), os.cpu_count()))
+
         if 'materialize_joins' in index_params:
             if index_params['materialize_joins'] == 'False':
                 self._materialize_joins = False
@@ -42,7 +46,7 @@ class ParlayIVF(BaseFilterANN):
                 self._materialize_joins = True
             else:
                 raise Exception('Invalid materialize_joins parameter')
-            
+
             if 'join_cutoff' in index_params:
                 self._join_cutoff = index_params['join_cutoff']
             else:
@@ -71,7 +75,7 @@ class ParlayIVF(BaseFilterANN):
             return 'mips'
         else:
             raise Exception('Invalid metric')
-        
+
     def translate_dtype(self, dtype):
         if 'float32' in str(dtype):
             return 'float'
@@ -92,7 +96,7 @@ class ParlayIVF(BaseFilterANN):
         # if 'n_lists' in query_args:
         #     self._lists = query_args['n_lists']
         # else:
-            # self._lists = 500
+        # self._lists = 500
         # if 'cutoff' in query_args:
         #     self._cutoff = query_args['cutoff']
         # else:
@@ -124,12 +128,13 @@ class ParlayIVF(BaseFilterANN):
             self._search_limits = query_args['search_limits']
         else:
             self._search_limits = list(self._weight_classes) + [3_000_000]
-            
+
         self.set_beamsearch_params()
 
     def set_beamsearch_params(self, k=10):
         for i in range(3):
-            self.index.set_query_params(wp.QueryParams(k, self._beam_widths[i], 1.35, self._search_limits[i], self._max_degree[i]), i)
+            self.index.set_query_params(wp.QueryParams(
+                k, self._beam_widths[i], 1.35, self._search_limits[i], self._max_degree[i]), i)
 
     def sync_build_params(self):
         self.index.set_max_iter(self._max_iter)
@@ -140,8 +145,7 @@ class ParlayIVF(BaseFilterANN):
             self.index.set_build_params(bp, i)
 
         self.index.set_materialized_join_cutoff(self._join_cutoff)
-        
-    
+
     def fit(self, dataset):
         start = time.time()
         ds = DATASETS[dataset]()
@@ -158,7 +162,8 @@ class ParlayIVF(BaseFilterANN):
         self.sync_build_params()
 
         print("Index initialized")
-        self.index.fit_from_filename(ds.get_dataset_fn(), os.path.join(ds.basedir, ds.ds_metadata_fn), self._cutoff, self._cluster_size, str(self.create_index_dir(ds)), self._weight_classes, False)
+        self.index.fit_from_filename(ds.get_dataset_fn(), os.path.join(ds.basedir, ds.ds_metadata_fn),
+                                     self._cutoff, self._cluster_size, str(self.create_index_dir(ds)), self._weight_classes, False)
         # self.index.print_stats()
         print(f"Index fit in {time.time() - start} seconds")
         self._build_time = time.time() - start
@@ -181,16 +186,19 @@ class ParlayIVF(BaseFilterANN):
 
         print(ds.get_dataset_fn())
 
-        self.index.fit_from_filename(ds.get_dataset_fn(), os.path.join(ds.basedir, ds.ds_metadata_fn), self._cutoff, self._cluster_size, str(self.create_index_dir(ds)), self._weight_classes, True)
+        self.index.fit_from_filename(ds.get_dataset_fn(), os.path.join(ds.basedir, ds.ds_metadata_fn),
+                                     self._cutoff, self._cluster_size, str(self.create_index_dir(ds)), self._weight_classes, True)
         # self.index.print_stats()
         print(f"Index loaded in {time.time() - start} seconds")
         return True
-    
+
     def filtered_query(self, X, filter, k):
         start = time.time()
 
         if k != 10:
             self.set_beamsearch_params(k)
+
+        # print(filter.shape, filter)
 
         # there's almost certainly a way to do this in less than 0.1s, which costs us ~200 QPS
         rows, cols = filter.nonzero()
@@ -207,14 +215,16 @@ class ParlayIVF(BaseFilterANN):
         print(f"Filter construction took {time.time() - start} seconds")
         search_start = time.time()
         nq = X.shape[0]
-        
+
         if self._sorted_queries:
-            self.res, self.query_dists = self.index.batch_filter_search(X, filters, nq, k)
+            self.res, self.query_dists = self.index.batch_filter_search(
+                X, filters, nq, k)
         else:
-            self.res, self.query_dists = self.index.unsorted_batch_filter_search(X, filters, nq, k)
-        
+            self.res, self.query_dists = self.index.unsorted_batch_filter_search(
+                X, filters, nq, k)
+
         print(f"Search took {time.time() - search_start} seconds")
-        self.index.print_stats() # should be commented out for production
+        self.index.print_stats()  # should be commented out for production
         self.index.reset()
 
     def get_results(self):
@@ -223,13 +233,13 @@ class ParlayIVF(BaseFilterANN):
         # print(self.res[:10, :10])
         # print(self.query_dists[:10, :10])
         return self.res
-    
+
     def __str__(self):
         return f"ParlayIVF(metric={self._metric}, dtype={self.dtype}, T={os.environ['PARLAY_NUM_THREADS']}, cluster_size={self._cluster_size:,}, cutoff={self._cutoff:,}, target_points={self._target_points:,}, tiny_cutoff={self._tiny_cutoff:,}, max_iter={self._max_iter:,}, weight_classes={self._weight_classes}, max_degrees={self._max_degree}, beam_widths={self._beam_widths}, search_limits={self._search_limits})"
-    
+
     def index_name(self):
         return f"parlayivf_{self._metric}_{self.dtype}"
-    
+
     def footprint(self):
         """memory footprint of the index in bytes"""
         return self.index.footprint()

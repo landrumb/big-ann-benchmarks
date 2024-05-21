@@ -7,6 +7,370 @@ wiki-10M:
       run-groups:
         base:
           args: |
+            [{"cluster_size": 10000, 
+              "T": 180,
+              "cutoff": 20000,
+              "max_iter": 10,
+              "weight_classes": [100000, 400000],
+              "build_params": [{"max_degree": 10,
+                                "limit": 200,
+                                "alpha": 0.1},
+                              {"max_degree": 12,
+                               "limit": 200,
+                               "alpha": 0.1},
+                              {"max_degree": 16,
+                               "limit": 200,
+                               "alpha": 0.1}],
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True",
+              "material_join_cutoff": 50000,
+              "sorted_queries": "True"
+            }]
+          query-args: |
+            [{"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [90, 90, 90]
+            },
+            {"target_points": 50000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 5000,
+              "tiny_cutoff": 28000,
+              "beam_widths": [90, 57, 90],
+              "search_limits": [500, 500, 500]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [60, 60, 60]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [90, 90, 90]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [20, 20, 20]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [30, 30, 30]
+            },
+            {"target_points": 7500,
+              "tiny_cutoff": 35000,
+              "beam_widths": [55, 55, 55]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [500, 500, 500]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 30000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [50, 50, 50]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [50, 50, 50]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 80000,
+              "beam_widths": [30, 30, 30]
+            }
+            ]
+    parlayivf-no-material-join:
+      docker-tag: neurips23-filter-parlayivf
+      module: neurips23.filter.parlayivf.parlayivf
+      constructor: ParlayIVF
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"cluster_size": 5000, 
+              "T": 8,
+              "cutoff": 10000,
+              "max_iter": 10,
+              "weight_classes": [100000, 400000],
+              "build_params": [{"max_degree": 8,
+                                "limit": 200,
+                                "alpha": 1.175},
+                              {"max_degree": 10,
+                               "limit": 200,
+                               "alpha": 1.175},
+                              {"max_degree": 12,
+                               "limit": 200,
+                               "alpha": 1.175}],
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "False",
+              "sorted_queries": "True"
+            }]
+          query-args: |
+            [{"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [90, 90, 90]
+            },
+            {"target_points": 50000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 5000,
+              "tiny_cutoff": 28000,
+              "beam_widths": [90, 57, 90],
+              "search_limits": [500, 500, 500]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [60, 60, 60]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [90, 90, 90]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [20, 20, 20]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [30, 30, 30]
+            },
+            {"target_points": 7500,
+              "tiny_cutoff": 35000,
+              "beam_widths": [55, 55, 55]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [500, 500, 500]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 30000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [50, 50, 50]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [50, 50, 50]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 80000,
+              "beam_widths": [30, 30, 30]
+            }
+            ]
+    parlayivf-no-sorted-queries:
+      docker-tag: neurips23-filter-parlayivf
+      module: neurips23.filter.parlayivf.parlayivf
+      constructor: ParlayIVF
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"cluster_size": 20000, 
+              "T": 8,
+              "cutoff": 20000,
+              "max_iter": 10,
+              "weight_classes": [100000, 400000],
+              "build_params": [{"max_degree": 8,
+                                "limit": 200,
+                                "alpha": 0.1},
+                              {"max_degree": 10,
+                               "limit": 200,
+                               "alpha": 0.1},
+                              {"max_degree": 12,
+                               "limit": 200,
+                               "alpha": 0.1}],
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True",
+              "material_join_cutoff": 50000,
+              "sorted_queries": "False"
+            }]
+          query-args: |
+            [{"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [90, 90, 90]
+            },
+            {"target_points": 50000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 5000,
+              "tiny_cutoff": 28000,
+              "beam_widths": [90, 57, 90],
+              "search_limits": [500, 500, 500]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [60, 60, 60]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [90, 90, 90]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [20, 20, 20]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [30, 30, 30]
+            },
+            {"target_points": 7500,
+              "tiny_cutoff": 35000,
+              "beam_widths": [55, 55, 55]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [500, 500, 500]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 30000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [50, 50, 50]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [50, 50, 50]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 80000,
+              "beam_widths": [30, 30, 30]
+            }
+            ]
+    parlayivf-no-weight-classes:
+      docker-tag: neurips23-filter-parlayivf
+      module: neurips23.filter.parlayivf.parlayivf
+      constructor: ParlayIVF
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"cluster_size": 5000, 
+              "T": 64,
+              "cutoff": 20000,
+              "max_iter": 10,
+              "weight_classes": [1, 1],
+              "build_params": [{"max_degree": 12,
+                               "limit": 200,
+                               "alpha": 0.1},
+                               {"max_degree": 12,
+                               "limit": 200,
+                               "alpha": 0.1},
+                               {"max_degree": 12,
+                               "limit": 200,
+                               "alpha": 0.1}],
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "False",
+              "sorted_queries": "True"
+            }]
+          query-args: |
+            [{"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [90, 90, 90]
+            },
+            {"target_points": 50000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 5000,
+              "tiny_cutoff": 28000,
+              "beam_widths": [90, 57, 90],
+              "search_limits": [500, 500, 500]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [60, 60, 60]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [90, 90, 90]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [20, 20, 20]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [30, 30, 30]
+            },
+            {"target_points": 7500,
+              "tiny_cutoff": 35000,
+              "beam_widths": [55, 55, 55]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [500, 500, 500]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 30000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [40, 40, 40]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 100000,
+              "beam_widths": [50, 50, 50]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 60000,
+              "beam_widths": [50, 50, 50]
+            },
+            {"target_points": 15000,
+              "tiny_cutoff": 80000,
+              "beam_widths": [30, 30, 30]
+            }
+            ]
+
+wiki-10M-single:
+    parlayivf:
+      docker-tag: neurips23-filter-parlayivf
+      module: neurips23.filter.parlayivf.parlayivf
+      constructor: ParlayIVF
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
             [{"cluster_size": 5000, 
               "T": 180,
               "cutoff": 20000,
@@ -68,195 +432,6 @@ wiki-10M:
                "tiny_cutoff": 100000,
                "beam_widths": [40, 40, 40]
               }]
-    parlayivf-no-material-join:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "False",
-              "sorted_queries": "True"
-            }]
-          query-args: |
-            [{"target_points": 5000,
-              "tiny_cutoff": 30000,
-              "beam_widths": [85, 50, 95],
-              "search_limits": [500, 500, 500]
-              },
-              {"target_points": 7500,
-               "tiny_cutoff": 35000,
-               "beam_widths": [55, 55, 55]
-               },
-               {"target_points": 5000,
-              "tiny_cutoff": 28000,
-              "beam_widths": [90, 57, 90],
-              "search_limits": [500, 500, 500]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [60, 60, 60]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [90, 90, 90]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [90, 90, 90]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [50, 50, 50]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [50, 50, 50]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [40, 40, 40]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [40, 40, 40]
-              }]
-    parlayivf-no-sorted-queries:
-      docker-tag: neurips23-filter-parlayivf
-      module: neurips23.filter.parlayivf.parlayivf
-      constructor: ParlayIVF
-      base-args: ["@metric"]
-      run-groups:
-        base:
-          args: |
-            [{"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 1.175},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 1.175},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 1.175}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True",
-              "sorted_queries": "True"
-            },
-            {"cluster_size": 5000, 
-              "T": 8,
-              "cutoff": 10000,
-              "max_iter": 10,
-              "weight_classes": [100000, 400000],
-              "build_params": [{"max_degree": 8,
-                                "limit": 200,
-                                "alpha": 0.9},
-                              {"max_degree": 10,
-                               "limit": 200,
-                               "alpha": 0.9},
-                              {"max_degree": 12,
-                               "limit": 200,
-                               "alpha": 0.9}],
-              "bitvector_cutoff": 10000,
-              "materialize_joins": "True",
-              "sorted_queries": "False"
-            }]
-          query-args: |
-            [{"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 10000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 50000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 500000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [70, 70, 70]
-              },
-              {"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [90, 90, 90]
-              },
-              {"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [100, 100, 100]
-              },
-              {"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [120, 120, 120]
-              },
-              {"target_points": 15000,
-              "tiny_cutoff": 60000,
-              "beam_widths": [150, 150, 150]
-              },
-              {"target_points": 5000,
-              "tiny_cutoff": 30000,
-              "beam_widths": [85, 50, 95],
-              "search_limits": [500, 500, 500]
-              },
-              {"target_points": 7500,
-               "tiny_cutoff": 35000,
-               "beam_widths": [55, 55, 55]
-              },
-              {"target_points": 5000,
-              "tiny_cutoff": 28000,
-              "beam_widths": [90, 57, 90],
-              "search_limits": [500, 500, 500]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [60, 60, 60]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [90, 90, 90]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [90, 90, 90]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [50, 50, 50]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [50, 50, 50]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 60000,
-               "beam_widths": [40, 40, 40]
-              },
-              {"target_points": 15000,
-               "tiny_cutoff": 100000,
-               "beam_widths": [40, 40, 40]
-              }
-              ]
 
 wiki-1M:
     parlayivf:
@@ -471,3 +646,218 @@ wiki-1M-and:
                "beam_widths": [40, 40, 40]
               }]
 
+wiki-20M:
+    parlayivf:
+      docker-tag: neurips23-filter-parlayivf
+      module: neurips23.filter.parlayivf.parlayivf
+      constructor: ParlayIVF
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"cluster_size": 5000, 
+              "T": 180,
+              "cutoff": 20000,
+              "max_iter": 10,
+              "weight_classes": [100000, 400000],
+              "build_params": [{"max_degree": 8,
+                                "limit": 200,
+                                "alpha": 0.1},
+                              {"max_degree": 10,
+                               "limit": 200,
+                               "alpha": 0.1},
+                              {"max_degree": 12,
+                               "limit": 200,
+                               "alpha": 0.1}],
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True",
+              "join_cutoff": 100000,
+              "sorted_queries": "True"
+            }]
+          query-args: |
+            [{"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [500, 500, 500]
+              },
+              {"target_points": 7500,
+               "tiny_cutoff": 35000,
+               "beam_widths": [55, 55, 55]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 28000,
+              "beam_widths": [90, 57, 90],
+              "search_limits": [500, 500, 500]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [60, 60, 60]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [90, 90, 90]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [90, 90, 90]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [50, 50, 50]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [50, 50, 50]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [40, 40, 40]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [40, 40, 40]
+              }]
+
+wiki-30M:
+    parlayivf:
+      docker-tag: neurips23-filter-parlayivf
+      module: neurips23.filter.parlayivf.parlayivf
+      constructor: ParlayIVF
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"cluster_size": 5000, 
+              "T": 180,
+              "cutoff": 20000,
+              "max_iter": 10,
+              "weight_classes": [100000, 400000],
+              "build_params": [{"max_degree": 8,
+                                "limit": 200,
+                                "alpha": 0.1},
+                              {"max_degree": 10,
+                               "limit": 200,
+                               "alpha": 0.1},
+                              {"max_degree": 12,
+                               "limit": 200,
+                               "alpha": 0.1}],
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True",
+              "join_cutoff": 100000,
+              "sorted_queries": "True"
+            }]
+          query-args: |
+            [{"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [500, 500, 500]
+              },
+              {"target_points": 7500,
+               "tiny_cutoff": 35000,
+               "beam_widths": [55, 55, 55]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 28000,
+              "beam_widths": [90, 57, 90],
+              "search_limits": [500, 500, 500]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [60, 60, 60]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [90, 90, 90]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [90, 90, 90]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [50, 50, 50]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [50, 50, 50]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [40, 40, 40]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [40, 40, 40]
+              }]
+
+wiki-35M:
+    parlayivf:
+      docker-tag: neurips23-filter-parlayivf
+      module: neurips23.filter.parlayivf.parlayivf
+      constructor: ParlayIVF
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"cluster_size": 5000, 
+              "T": 180,
+              "cutoff": 25000,
+              "max_iter": 10,
+              "weight_classes": [100000, 400000],
+              "build_params": [{"max_degree": 8,
+                                "limit": 200,
+                                "alpha": 0.1},
+                              {"max_degree": 10,
+                               "limit": 200,
+                               "alpha": 0.1},
+                              {"max_degree": 12,
+                               "limit": 200,
+                               "alpha": 0.1}],
+              "bitvector_cutoff": 10000,
+              "materialize_joins": "True",
+              "join_cutoff": 100000,
+              "sorted_queries": "True"
+            }]
+          query-args: |
+            [{"target_points": 5000,
+              "tiny_cutoff": 30000,
+              "beam_widths": [85, 50, 95],
+              "search_limits": [500, 500, 500]
+              },
+              {"target_points": 7500,
+               "tiny_cutoff": 35000,
+               "beam_widths": [55, 55, 55]
+              },
+              {"target_points": 5000,
+              "tiny_cutoff": 28000,
+              "beam_widths": [90, 57, 90],
+              "search_limits": [500, 500, 500]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [60, 60, 60]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [90, 90, 90]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [90, 90, 90]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [50, 50, 50]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [50, 50, 50]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 60000,
+               "beam_widths": [40, 40, 40]
+              },
+              {"target_points": 15000,
+               "tiny_cutoff": 100000,
+               "beam_widths": [40, 40, 40]
+              }]

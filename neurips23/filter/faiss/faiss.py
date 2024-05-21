@@ -84,7 +84,7 @@ class FAISS(BaseFilterANN):
 
     def __init__(self,  metric, index_params):
         self._index_params = index_params
-        self._metric = metric
+        self._metric = faiss.METRIC_L2 if metric == 'euclidean' else faiss.METRIC_INNER_PRODUCT
         print(index_params)
         self.indexkey = index_params.get("indexkey", "IVF32768,SQ8")
         self.binarysig = index_params.get("binarysig", True)
@@ -108,7 +108,7 @@ class FAISS(BaseFilterANN):
             self.meta_b = ds.get_dataset_metadata()
             self.meta_b.sort_indices()
 
-        index = faiss.index_factory(ds.d, self.indexkey)
+        index = faiss.index_factory(ds.d, self.indexkey, self._metric)
         xb = ds.get_dataset()
         print("train")
         index.train(xb)
